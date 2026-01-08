@@ -113,4 +113,5 @@ Studyplus や Notion などがありますが、
 - デプロイ：Render
 
 ## 画面遷移図
-Figma：https://www.figma.com/board/1dB5gIcftLY0UIlemkJtR2/FigJam%E3%81%B8%E3%82%88%E3%81%86%E3%81%93%E3%81%9D?node-id=0-1&t=DwnMEfEGFvsGIG85-1
+Figma：https://www.figma.com/board/1dB5gIcftLY0UIlemkJtR2/FigJam%E3%81%B8%E3%82%88%E3%81%86%E3%81%93%E3%81%9D?node-id=0-1&t=DwnMEfEGFvsGIG85-1(画面遷移図のURL)
+
