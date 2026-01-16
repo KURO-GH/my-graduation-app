@@ -2,7 +2,7 @@ class StudyLogsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @study_logs = current_user.study_logs
+    @study_logs = current_user.study_logs.order(created_at: :desc)
   end
 
   def new

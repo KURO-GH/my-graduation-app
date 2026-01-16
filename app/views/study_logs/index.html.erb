@@ -1,12 +1,15 @@
 <h1>学習記録一覧</h1>
 
-<%= link_to '新規投稿', new_study_log_path %>
+<%= link_to '＋ 新規投稿', new_study_log_path %>
 
-<ul>
-  <% @study_logs.each do |log| %>
-    <li>
-      <strong><%= log.title %></strong><br>
-      <%= log.content %>
-    </li>
-  <% end %>
-</ul>
+<hr>
+
+<% @study_logs.each do |log| %>
+  <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+    <h3><%= log.title %></h3>
+    <p><%= simple_format(log.content) %></p>
+    <small>
+      投稿日時：<%= log.created_at.strftime("%Y/%m/%d %H:%M") %>
+    </small>
+  </div>
+<% end %>
