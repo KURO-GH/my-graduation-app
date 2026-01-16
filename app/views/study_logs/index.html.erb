@@ -1,0 +1,12 @@
+<h1>学習記録一覧</h1>
+
+<%= link_to '新規投稿', new_study_log_path %>
+
+<ul>
+  <% @study_logs.each do |log| %>
+    <li>
+      <strong><%= log.title %></strong><br>
+      <%= log.content %>
+    </li>
+  <% end %>
+</ul>
