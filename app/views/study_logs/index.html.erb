@@ -1,11 +1,11 @@
 <h1>学習記録一覧</h1>
 
-<%= link_to '＋ 新規投稿', new_study_log_path %>
+<%= link_to '＋ 新規投稿', new_study_log_path, class: 'btn btn-edit' %>
 
 <hr>
 
 <% @study_logs.each do |log| %>
-  <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+  <div class="study-log">
     <h3><%= log.title %></h3>
 
     <p><%= simple_format(log.content) %></p>
@@ -15,12 +15,15 @@
     </small>
     <br>
 
-    <%= link_to '編集', edit_study_log_path(log) %>
+    <%= link_to '編集',
+                edit_study_log_path(log),
+                class: 'btn btn-edit' %>
 
     <%= button_to '削除',
                   study_log_path(log),
                   method: :delete,
                   data: { confirm: '削除しますか？' },
+                  class: 'btn btn-delete',
                   form: { style: 'display: inline' } %>
   </div>
 <% end %>

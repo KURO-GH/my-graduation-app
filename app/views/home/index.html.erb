@@ -1,13 +1,18 @@
-<h1>学習記録アプリ</h1>
+<div class="hero">
+  <h1>📘 学習記録アプリ</h1>
+  <p class="hero-text">
+    今日の学びを、少しずつ積み上げよう。
+  </p>
 
-<% if user_signed_in? %>
-  <p>ログイン中</p>
-
-  <%= link_to '学習記録一覧へ', study_logs_path %>
-  <br><br>
-  <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
-<% else %>
-  <%= link_to '新規登録', new_user_registration_path %>
-  <br>
-  <%= link_to 'ログイン', new_user_session_path %>
-<% end %>
+  <% if user_signed_in? %>
+    <div class="hero-buttons">
+      <%= link_to '学習記録一覧へ', study_logs_path, class: 'btn btn-edit' %>
+      <%= button_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'btn btn-delete' %>
+    </div>
+  <% else %>
+    <div class="hero-buttons">
+      <%= link_to '新規登録', new_user_registration_path, class: 'btn btn-edit' %>
+      <%= link_to 'ログイン', new_user_session_path, class: 'btn btn-delete' %>
+    </div>
+  <% end %>
+</div>

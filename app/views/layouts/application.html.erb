@@ -10,6 +10,15 @@
   </head>
 
   <body>
-    <%= yield %>
+    <% if user_signed_in? %>
+    <header style="text-align: right; padding: 16px;">
+      <%= button_to 'ログアウト',
+                    destroy_user_session_path,
+                    method: :delete,
+                    class: 'btn btn-back' %>
+    </header>
+  <% end %>
+
+  <%= yield %>
   </body>
 </html>
