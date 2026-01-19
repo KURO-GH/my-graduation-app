@@ -13,3 +13,82 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  background-color: #f5f7fb;
+  font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+  color: #333;
+}
+
+/* ===== タイトル ===== */
+h1 {
+  text-align: center;
+  margin-bottom: 24px;
+  font-weight: bold;
+}
+
+/* ===== 学習記録カード ===== */
+.study-log {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* ===== ボタン共通 ===== */
+.btn {
+  display: inline-block;
+  padding: 6px 14px;
+  margin-right: 6px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/* 編集ボタン */
+.btn-edit {
+  background-color: #6ccf8e;
+}
+
+/* 削除ボタン */
+.btn-delete {
+  background-color: #f28b82;
+  border: none;
+}
+
+/* ===== フォーム画面用 ===== */
+.form-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* submitボタンを少し大きく */
+input[type="submit"].btn {
+  padding: 10px 20px;
+}
+
+.btn-back {
+  background-color: #b0b8c1;
+}
+
+header {
+  background-color: #f5f7fb;
+}
+
+.hero {
+  text-align: center;
+  margin-top: 80px;
+}
+
+.hero-text {
+  color: #666;
+  margin-bottom: 32px;
+  font-size: 16px;
+}
+
+.hero-buttons .btn {
+  margin: 0 8px;
+}

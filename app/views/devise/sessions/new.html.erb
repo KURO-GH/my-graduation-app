@@ -1,0 +1,21 @@
+<h1>ログイン</h1>
+
+<div class="form-wrapper">
+  <div class="study-log">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div>
+        <%= f.label :email %>
+        <%= f.email_field :email %>
+      </div>
+
+      <div>
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+      </div>
+
+      <div style="margin-top: 16px;">
+        <%= f.submit 'ログイン', class: 'btn btn-edit' %>
+      </div>
+    <% end %>
+  </div>
+</div>
