@@ -1,15 +1,5 @@
-<h1>学習記録を投稿</h1>
+<h1>学習記録 新規投稿</h1>
 
-<%= form_with model: @study_log, local: true do |f| %>
-  <div>
-    <%= f.label :title, 'タイトル' %><br>
-    <%= f.text_field :title %>
-  </div>
+<%= render 'form', study_log: @study_log %>
 
-  <div>
-    <%= f.label :content, '内容' %><br>
-    <%= f.text_area :content %>
-  </div>
-
-  <%= f.submit '投稿する' %>
-<% end %>
+<%= link_to '一覧に戻る', study_logs_path %>
