@@ -3,5 +3,5 @@
 Rails.application.routes.draw do
 devise_for :users
 root 'home#index'
-resources :study_logs, only: [:index, :new, :create]
+resources :study_logs, only: [:index, :new, :create, :edit, :update, :destroy]
 end
