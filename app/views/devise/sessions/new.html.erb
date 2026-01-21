@@ -2,6 +2,13 @@
 
 <div class="form-wrapper">
   <div class="study-log">
+
+    <% if alert.present? %>
+      <div class="alert alert-danger">
+        <%= alert %>
+      </div>
+    <% end %>
+
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div>
         <%= f.label :email %>
@@ -17,5 +24,6 @@
         <%= f.submit 'ログイン', class: 'btn btn-edit' %>
       </div>
     <% end %>
+
   </div>
 </div>

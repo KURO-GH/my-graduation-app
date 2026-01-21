@@ -6,8 +6,18 @@ ja:
       study_log:
         title: タイトル
         content: 内容
+      user:
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード（確認）
 
   errors:
     messages:
       blank: "を入力してください"
       too_long: "は%{count}文字以内で入力してください"
+      confirmation: "が一致しません"
+      taken: "はすでに使用されています"
+  devise:
+    failure:
+      invalid: "メールアドレスまたはパスワードが違います"
+      not_found_in_database: "メールアドレスまたはパスワードが違います"
