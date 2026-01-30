@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class StudyLogsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_study_log, only: [:edit, :update, :destroy]
+  before_action :set_study_log, only: %i[edit update destroy]
 
   def index
     @study_logs = current_user.study_logs.order(created_at: :desc)
@@ -10,6 +12,8 @@ class StudyLogsController < ApplicationController
     @study_log = StudyLog.new
   end
 
+  def edit; end
+
   def create
     @study_log = current_user.study_logs.build(study_log_params)
 
@@ -18,9 +22,6 @@ class StudyLogsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def edit
   end
 
   def update
