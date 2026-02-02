@@ -7,18 +7,28 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+    <%# OGP %>
+    <meta property="og:title" content="学習記録アプリ" />
+    <meta property="og:description" content="日々の学習を手軽に記録できるシンプルな学習記録アプリです。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://my-graduation-app.onrender.com/" />
+    <meta property="og:image" content="<%= image_url('ogp.png') %>" />
+
+    <%# Twitter %>
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
 
   <body>
     <% if user_signed_in? %>
-    <header style="text-align: right; padding: 16px;">
-      <%= button_to 'ログアウト',
-                    destroy_user_session_path,
-                    method: :delete,
-                    class: 'btn btn-back' %>
-    </header>
-  <% end %>
+      <header style="text-align: right; padding: 16px;">
+        <%= button_to 'ログアウト',
+                      destroy_user_session_path,
+                      method: :delete,
+                      class: 'btn btn-back' %>
+      </header>
+    <% end %>
 
-  <%= yield %>
+    <%= yield %>
   </body>
 </html>
