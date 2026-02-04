@@ -70,3 +70,6 @@ gem 'devise'
 gem 'rspec-rails', '~> 7.1', groups: %i[development test]
 
 gem 'ffi'
+
+# 権限管理
+gem 'pundit'
