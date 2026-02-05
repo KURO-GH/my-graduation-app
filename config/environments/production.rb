@@ -3,7 +3,9 @@
 require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
+  # ================================
+  # 基本設定
+  # ================================
 
   config.cache_classes = true
   config.eager_load = true
@@ -20,16 +22,16 @@ Rails.application.configure do
   config.log_tags  = [:request_id]
 
   # ================================
-  # Action Mailer（Devise）
+  # Action Mailer（Devise / SendGrid）
   # ================================
 
-  # URL 設定
+  # URL 設定（Devise のリンク用）
   config.action_mailer.default_url_options = {
     host: 'my-graduation-app.onrender.com',
     protocol: 'https'
   }
 
-  # From アドレス（SendGridで検証済みのもの）
+  # From アドレス（SendGridで検証済み）
   config.action_mailer.default_options = {
     from: 'k.s06020608@gmail.com'
   }
@@ -40,14 +42,19 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.smtp_settings = {
-    address: ENV['SMTP_ADDRESS'],          # smtp.sendgrid.net
-    port: 587,
-    domain: ENV['SMTP_DOMAIN'],            # my-graduation-app.onrender.com
-    user_name: ENV['SMTP_USERNAME'],       # apikey
-    password: ENV['SMTP_PASSWORD'],        # SendGrid API Key
-    authentication: :plain,
+    address:              ENV['SMTP_ADDRESS'],   # smtp.sendgrid.net
+    port:                 587,
+    domain:               ENV['SMTP_DOMAIN'],    # my-graduation-app.onrender.com
+    user_name:            ENV['SMTP_USERNAME'],  # apikey
+    password:             ENV['SMTP_PASSWORD'],  # SendGrid API Key
+    authentication:       :plain,
     enable_starttls_auto: true
   }
+
+  # ================================
+  # ActiveJob（本番でメールを確実に送る）
+  # ================================
+  config.active_job.queue_adapter = :async
 
   config.action_mailer.perform_caching = false
 
