@@ -4,9 +4,13 @@ ja:
       new:
         forgot_your_password: "パスワードをお忘れですか？"
         send_me_reset_password_instructions: "パスワード再設定メールを送信"
-
       edit:
         change_your_password: "パスワードを変更"
         new_password: "新しいパスワード"
         confirm_new_password: "新しいパスワード（確認）"
         change_my_password: "パスワードを変更する"
+
+  errors:
+    messages:
+      not_saved: "保存できませんでした。%{count} 件のエラーがあります。"
+      not_found: "メールアドレスが存在しません"
