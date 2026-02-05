@@ -42,13 +42,15 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.smtp_settings = {
-    address:              ENV['SMTP_ADDRESS'],   # smtp.sendgrid.net
-    port:                 587,
-    domain:               ENV['SMTP_DOMAIN'],    # my-graduation-app.onrender.com
-    user_name:            ENV['SMTP_USERNAME'],  # apikey
-    password:             ENV['SMTP_PASSWORD'],  # SendGrid API Key
-    authentication:       :plain,
-    enable_starttls_auto: true
+    address: 'smtp.sendgrid.net',
+    port: 587,
+    domain: 'sendgrid.net',
+    user_name: 'apikey',
+    password: ENV['SMTP_PASSWORD'],
+    authentication: :plain,
+    enable_starttls_auto: true,
+    open_timeout: 5,
+    read_timeout: 5
   }
 
   # ================================
