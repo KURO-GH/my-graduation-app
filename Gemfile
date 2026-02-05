@@ -73,3 +73,5 @@ gem 'ffi'
 
 # 権限管理
 gem 'pundit'
+
+gem 'sendgrid-ruby'

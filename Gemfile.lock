@@ -294,12 +294,15 @@ GEM
       rubocop (>= 1.75.0, < 2.0)
       rubocop-ast (>= 1.44.0, < 2.0)
     ruby-progressbar (1.13.0)
+    ruby_http_client (3.6.0)
     rubyzip (3.2.2)
     securerandom (0.4.1)
     selenium-webdriver (4.1.0)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
+    sendgrid-ruby (6.7.0)
+      ruby_http_client (~> 3.4)
     sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
       logger
@@ -371,6 +374,7 @@ DEPENDENCIES
   rubocop
   rubocop-rails
   selenium-webdriver
+  sendgrid-ruby
   sprockets-rails
   stimulus-rails
   turbo-rails
