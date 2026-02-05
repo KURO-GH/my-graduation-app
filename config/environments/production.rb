@@ -53,9 +53,6 @@ Rails.application.configure do
     read_timeout: 5
   }
 
-  Rails.logger.info "SENDGRID_API_KEY present? #{ENV['SENDGRID_API_KEY'].present?}"
-  Rails.logger.info "SENDGRID_API_KEY length: #{ENV['SENDGRID_API_KEY']&.length}"
-
   # ================================
   # ActiveJob（本番でメールを確実に送る）
   # ================================
