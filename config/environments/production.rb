@@ -32,20 +32,28 @@ Rails.application.configure do
   }
 
   # From アドレス（SendGridで検証済み）
-  config.action_mailer.default_options = {
-    from: 'k.s06020608@gmail.com'
-  }
+  config.action_mailer.default_options = { from: 'k.s06020608@gmail.com' }
 
   # SMTP 設定（SendGrid）
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    user_name: 'apikey', # SendGrid 固定
+    password: ENV['SENDGRID_API_KEY'], # APIキーを環境変数から
+    domain: 'my-graduation-app.onrender.com',
+    address: 'smtp.sendgrid.net',
+    port: 587,
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
+
+  config.action_mailer.perform_caching = false
 
   # ================================
   # ActiveJob（本番でメールを確実に送る）
   # ================================
   config.active_job.queue_adapter = :async
-
-  config.action_mailer.perform_caching = false
 
   # ================================
   # その他
