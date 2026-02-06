@@ -7,7 +7,7 @@ class SendgridMailer
     mail = SendGrid::Mail.new
 
     mail.from = Email.new(
-      email: 'no-reply@my-graduation-app.com',
+      email: 'k.s06020608@gmail.com',
       name: 'My Graduation App'
     )
 
