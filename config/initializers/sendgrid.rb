@@ -1,4 +1,4 @@
 require 'sendgrid-ruby'
 include SendGrid
 
-SENDGRID_API_KEY = ENV.fetch('SENDGRID_API_KEY')
+SENDGRID_API_KEY = ENV['SENDGRID_API_KEY']
