@@ -7,8 +7,11 @@
   <%= f.submit "検索", class: "btn btn-info" %>
 <% end %>
 
-<!-- 新規投稿ボタン -->
-<%= link_to '＋ 新規投稿', new_study_log_path, class: 'btn btn-edit', style: "margin-top: 1rem;" %>
+<!-- 新規投稿ボタン + 振り返りリンク -->
+<div style="margin-top: 1rem; margin-bottom: 2rem;">
+  <%= link_to '＋ 新規投稿', new_study_log_path, class: 'btn btn-edit' %>
+  <%= link_to "習慣の振り返りを見る", review_habits_path, class: "btn btn-primary", style: "margin-left: 1rem;" %>
+</div>
 
 <hr>
 
@@ -16,16 +19,11 @@
 <% @study_logs.each do |log| %>
   <div class="study-log">
     <h3><%= log.title %> (<%= log.category %>)</h3>
-
     <p><%= simple_format(log.content) %></p>
-
     <small>投稿日：<%= log.created_at.strftime("%Y/%m/%d %H:%M") %></small>
     <br>
 
-    <%= link_to '編集',
-                edit_study_log_path(log),
-                class: 'btn btn-edit' %>
-
+    <%= link_to '編集', edit_study_log_path(log), class: 'btn btn-edit' %>
     <%= button_to '削除',
                   study_log_path(log),
                   method: :delete,

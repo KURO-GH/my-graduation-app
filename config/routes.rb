@@ -14,4 +14,11 @@ Rails.application.routes.draw do
 
   # 学習記録のCRUD
   resources :study_logs, only: %i[index new create edit update destroy]
+
+  # 習慣のCRUD + 振り返りページ
+  resources :habits do
+    collection do
+      get :review   # /habits/review で振り返りページ
+    end
+  end
 end
