@@ -33,11 +33,15 @@
                   form: { style: 'display: inline; margin-right: 0.5rem;' } %>
 
     <%# 完了ボタン／完了解除ボタンを切り替え %>
-    <% habit_for_log = @habits.first %> <!-- ここはとりあえずサンプルで1つだけ表示 -->
-    <%= button_to (habit_for_log.completed ? "完了解除" : "完了"),
-                  toggle_complete_habit_path(habit_for_log),
-                  method: :patch,
-                  class: "btn btn-success",
-                  form: { style: 'display: inline;' } %>
+    <% if @habits.any? %>
+      <% habit_for_log = @habits.first %> <!-- とりあえずサンプルで1つだけ表示 -->
+      <%= button_to (habit_for_log.completed ? "完了解除" : "完了"),
+                    toggle_complete_habit_path(habit_for_log),
+                    method: :patch,
+                    class: "btn btn-success",
+                    form: { style: 'display: inline;' } %>
+    <% end %> <!-- ← ここがif @habits.any? の閉じタグ -->
+
   </div>
+  <hr>
 <% end %>
