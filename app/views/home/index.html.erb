@@ -7,12 +7,24 @@
   <% if user_signed_in? %>
     <div class="hero-buttons">
       <%= link_to '学習記録一覧へ', study_logs_path, class: 'btn btn-edit' %>
-      <%= button_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'btn btn-delete' %>
+      <%= button_to 'ログアウト',
+            destroy_user_session_path,
+            method: :delete,
+            class: 'btn btn-delete' %>
     </div>
   <% else %>
     <div class="hero-buttons">
-      <%= link_to '新規登録', new_user_registration_path, class: 'btn btn-edit' %>
-      <%= link_to 'ログイン', new_user_session_path, class: 'btn btn-delete' %>
+      <%= link_to '新規登録',
+            new_user_registration_path,
+            class: 'btn btn-edit' %>
+
+      <%= link_to 'ログイン',
+            new_user_session_path,
+            class: 'btn btn-delete' %>
+
+      <%= link_to "Googleでログイン",
+    user_google_oauth2_omniauth_authorize_path,
+    data: { turbo: false } %><br />
     </div>
   <% end %>
 </div>

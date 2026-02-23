@@ -2,22 +2,17 @@
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
  *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
  *= require_tree .
  *= require_self
  */
 
+/* ===== ベース ===== */
 body {
   background-color: #f5f7fb;
   font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
   color: #333;
+  margin: 0;
+  padding: 0;
 }
 
 /* ===== タイトル ===== */
@@ -37,47 +32,73 @@ h1 {
 }
 
 /* ===== ボタン共通 ===== */
-.btn {
-  display: inline-block;
-  padding: 6px 14px;
-  margin-right: 6px;
-  border-radius: 20px;
-  text-decoration: none;
-  color: #fff;
-  font-size: 13px;
-  font-weight: bold;
+.btn,
+.hero-buttons .btn-google,
+.btn-google-form input[type="submit"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 10px 20px !important;
+  font-size: 13px !important;
+  font-weight: bold !important;
+  border-radius: 20px !important;
+  border: none !important;
+  cursor: pointer !important;
+  text-align: center !important;
+  line-height: normal !important;
+  vertical-align: middle !important;
+  text-decoration: none !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  transition: all 0.2s ease-in-out;
 }
 
-/* 編集ボタン */
+/* ===== 編集・削除・戻るボタン ===== */
 .btn-edit {
-  background-color: #6ccf8e;
+  background-color: #6ccf8e !important;
 }
 
-/* 削除ボタン */
 .btn-delete {
-  background-color: #f28b82;
-  border: none;
-}
-
-/* ===== フォーム画面用 ===== */
-.form-wrapper {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/* submitボタンを少し大きく */
-input[type="submit"].btn {
-  padding: 10px 20px;
+  background-color: #f28b82 !important;
 }
 
 .btn-back {
-  background-color: #b0b8c1;
+  background-color: #b0b8c1 !important;
 }
 
-header {
-  background-color: #f5f7fb;
+/* ===== 新規登録・ログイン・Googleログインボタン ===== */
+.btn-signup {
+  background-color: #6ccf8e !important;
+  color: #fff !important;
 }
 
+.btn-signup:hover {
+  background-color: #57b375 !important;
+}
+
+.btn-login {
+  background-color: #4285f4 !important;
+  color: #fff !important;
+}
+
+.btn-login:hover {
+  background-color: #357ae8 !important;
+}
+
+.btn-google,
+.hero-buttons .btn-google,
+.btn-google-form input[type="submit"] {
+  background-color: #4285f4 !important;
+  color: #fff !important;
+}
+
+.btn-google:hover,
+.hero-buttons .btn-google:hover,
+.btn-google-form input[type="submit"]:hover {
+  background-color: #357ae8 !important;
+}
+
+/* ===== heroセクション ===== */
 .hero {
   text-align: center;
   margin-top: 80px;
@@ -89,6 +110,16 @@ header {
   font-size: 16px;
 }
 
-.hero-buttons .btn {
-  margin: 0 8px;
+/* ===== hero-buttons 配置 ===== */
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-buttons form {
+  display: inline-block;
+  margin: 0;
 }

@@ -10,7 +10,12 @@ ja:
         confirm_new_password: "新しいパスワード（確認）"
         change_my_password: "パスワードを変更する"
 
+    omniauth_callbacks:
+      user:
+        failure: "認証に失敗しました。もう一度試してください。"
+
   errors:
     messages:
       not_saved: "保存できませんでした。%{count} 件のエラーがあります。"
       not_found: "メールアドレスが存在しません"
+      
