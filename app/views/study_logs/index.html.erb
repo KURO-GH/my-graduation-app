@@ -23,7 +23,7 @@
     <small>投稿日：<%= log.created_at.strftime("%Y/%m/%d %H:%M") %></small>
     <br><br>
 
-    <!-- ボタン3つだけ -->
+    <!-- 編集・削除ボタン -->
     <%= link_to '編集', edit_study_log_path(log), class: 'btn btn-edit', style: 'margin-right: 0.5rem;' %>
     <%= button_to '削除',
                   study_log_path(log),
@@ -32,16 +32,14 @@
                   class: 'btn btn-delete',
                   form: { style: 'display: inline; margin-right: 0.5rem;' } %>
 
-    <%# 完了ボタン／完了解除ボタンを切り替え %>
-    <% if @habits.any? %>
-      <% habit_for_log = @habits.first %> <!-- とりあえずサンプルで1つだけ表示 -->
-      <%= button_to (habit_for_log.completed ? "完了解除" : "完了"),
-                    toggle_complete_habit_path(habit_for_log),
+    <!-- 投稿ごとの完了ボタン -->
+    <% if log.habit %>
+      <%= button_to (log.habit.completed ? "完了解除" : "完了"),
+                    toggle_complete_habit_path(log.habit),
                     method: :patch,
                     class: "btn btn-success",
                     form: { style: 'display: inline;' } %>
-    <% end %> <!-- ← ここがif @habits.any? の閉じタグ -->
-
+    <% end %>
   </div>
   <hr>
 <% end %>

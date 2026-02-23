@@ -7,7 +7,6 @@ class StudyLogsController < ApplicationController
   def index
     # 自分が見れる学習記録を取得
     @study_logs = policy_scope(StudyLog).order(created_at: :desc)
-    @habits = Habit.all.order(created_at: :desc)  # ← 追加
     
     # キーワード検索
     if params[:keyword].present?
@@ -32,6 +31,9 @@ class StudyLogsController < ApplicationController
   def create
     @study_log = current_user.study_logs.build(study_log_params)
     authorize @study_log
+
+    # 投稿ごとに独立した Habit を作成して紐付け
+    @study_log.build_habit(user: current_user, completed: false)
 
     if @study_log.save
       redirect_to study_logs_path, notice: '学習記録を投稿しました'
