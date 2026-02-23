@@ -51,6 +51,6 @@ class StudyLogsController < ApplicationController
   end
 
   def study_log_params
-    params.require(:study_log).permit(:title, :content)
+  params.require(:study_log).permit(:title, :content, :category)
   end
 end

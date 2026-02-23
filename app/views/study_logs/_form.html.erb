@@ -20,6 +20,11 @@
   </div>
 
   <div>
+    <%= f.label :category, 'カテゴリ' %><br>
+    <%= f.select :category, ["学習", "仕事", "趣味", "その他"], prompt: "カテゴリを選択" %>
+  </div>
+
+  <div>
     <%= f.submit study_log.persisted? ? '更新する' : '投稿する' %>
   </div>
 <% end %>
