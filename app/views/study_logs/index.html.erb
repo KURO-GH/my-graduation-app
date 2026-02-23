@@ -1,18 +1,25 @@
 <h1>学習記録一覧</h1>
 
-<%= link_to '＋ 新規投稿', new_study_log_path, class: 'btn btn-edit' %>
+<!-- 検索フォーム -->
+<%= form_with url: study_logs_path, method: :get, local: true do |f| %>
+  <%= f.text_field :keyword, value: params[:keyword], placeholder: "タイトル・内容で検索" %>
+  <%= f.select :category, ["全て", "学習", "仕事", "趣味", "その他"], selected: params[:category] || "全て" %>
+  <%= f.submit "検索", class: "btn btn-info" %>
+<% end %>
+
+<!-- 新規投稿ボタン -->
+<%= link_to '＋ 新規投稿', new_study_log_path, class: 'btn btn-edit', style: "margin-top: 1rem;" %>
 
 <hr>
 
+<!-- 投稿一覧 -->
 <% @study_logs.each do |log| %>
   <div class="study-log">
-    <h3><%= log.title %></h3>
+    <h3><%= log.title %> (<%= log.category %>)</h3>
 
     <p><%= simple_format(log.content) %></p>
 
-    <small>
-      投稿日時：<%= log.created_at.strftime("%Y/%m/%d %H:%M") %>
-    </small>
+    <small>投稿日：<%= log.created_at.strftime("%Y/%m/%d %H:%M") %></small>
     <br>
 
     <%= link_to '編集',
@@ -26,4 +33,5 @@
                   class: 'btn btn-delete',
                   form: { style: 'display: inline' } %>
   </div>
+  <hr>
 <% end %>

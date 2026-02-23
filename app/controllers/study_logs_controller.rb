@@ -5,7 +5,18 @@ class StudyLogsController < ApplicationController
   before_action :set_study_log, only: %i[edit update destroy]
 
   def index
+    # 自分が見れる学習記録を取得
     @study_logs = policy_scope(StudyLog).order(created_at: :desc)
+
+    # キーワード検索
+    if params[:keyword].present?
+      @study_logs = @study_logs.where("title LIKE :kw OR content LIKE :kw", kw: "%#{params[:keyword]}%")
+    end
+
+    # カテゴリ絞り込み
+    if params[:category].present? && params[:category] != "全て"
+      @study_logs = @study_logs.where(category: params[:category])
+    end
   end
 
   def new
@@ -51,6 +62,6 @@ class StudyLogsController < ApplicationController
   end
 
   def study_log_params
-  params.require(:study_log).permit(:title, :content, :category)
+    params.require(:study_log).permit(:title, :content, :category)
   end
 end
