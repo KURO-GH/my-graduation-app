@@ -7,7 +7,8 @@ class StudyLogsController < ApplicationController
   def index
     # 自分が見れる学習記録を取得
     @study_logs = policy_scope(StudyLog).order(created_at: :desc)
-
+    @habits = Habit.all.order(created_at: :desc)  # ← 追加
+    
     # キーワード検索
     if params[:keyword].present?
       @study_logs = @study_logs.where("title LIKE :kw OR content LIKE :kw", kw: "%#{params[:keyword]}%")

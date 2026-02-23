@@ -4,11 +4,9 @@ class HabitsController < ApplicationController
   end
 
   def review
-    # ---------------------------------
     # カテゴリ一覧取得（フォーム用）
     @categories = Habit.pluck(:category).uniq
 
-    # ---------------------------------
     # ベースのHabit取得
     habits = Habit.all
 
@@ -31,7 +29,6 @@ class HabitsController < ApplicationController
     # 日付ごとにまとめる
     @habits_by_date = habits.group_by { |h| h.created_at.to_date }
 
-    # ---------------------------------
     # 今週の達成率
     this_week = Date.current.beginning_of_week..Date.current.end_of_week
     week_habits = habits.select { |h| this_week.cover?(h.created_at.to_date) }
@@ -43,5 +40,12 @@ class HabitsController < ApplicationController
     month_habits = habits.select { |h| this_month.cover?(h.created_at.to_date) }
     completed_count_month = month_habits.count { |h| h.completed }
     @month_completion_rate = month_habits.any? ? (completed_count_month.to_f / month_habits.size * 100).round : 0
+  end
+
+  # 完了/未完を切り替えるアクション
+  def toggle_complete
+    @habit = Habit.find(params[:id])
+    @habit.update(completed: !@habit.completed)
+    redirect_back(fallback_location: habits_path)
   end
 end

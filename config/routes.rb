@@ -15,10 +15,14 @@ Rails.application.routes.draw do
   # 学習記録のCRUD
   resources :study_logs, only: %i[index new create edit update destroy]
 
-  # 習慣のCRUD + 振り返りページ
+  # 習慣のCRUD + 振り返りページ + 完了ボタン
   resources :habits do
     collection do
       get :review   # /habits/review で振り返りページ
+    end
+
+    member do
+      patch :toggle_complete  # 完了ボタン用
     end
   end
 end

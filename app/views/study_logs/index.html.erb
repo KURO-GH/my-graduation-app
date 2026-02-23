@@ -17,19 +17,27 @@
 
 <!-- 投稿一覧 -->
 <% @study_logs.each do |log| %>
-  <div class="study-log">
+  <div class="study-log" style="margin-bottom: 1.5rem;">
     <h3><%= log.title %> (<%= log.category %>)</h3>
     <p><%= simple_format(log.content) %></p>
     <small>投稿日：<%= log.created_at.strftime("%Y/%m/%d %H:%M") %></small>
-    <br>
+    <br><br>
 
-    <%= link_to '編集', edit_study_log_path(log), class: 'btn btn-edit' %>
+    <!-- ボタン3つだけ -->
+    <%= link_to '編集', edit_study_log_path(log), class: 'btn btn-edit', style: 'margin-right: 0.5rem;' %>
     <%= button_to '削除',
                   study_log_path(log),
                   method: :delete,
                   data: { confirm: '削除しますか？' },
                   class: 'btn btn-delete',
-                  form: { style: 'display: inline' } %>
+                  form: { style: 'display: inline; margin-right: 0.5rem;' } %>
+
+    <%# 完了ボタン／完了解除ボタンを切り替え %>
+    <% habit_for_log = @habits.first %> <!-- ここはとりあえずサンプルで1つだけ表示 -->
+    <%= button_to (habit_for_log.completed ? "完了解除" : "完了"),
+                  toggle_complete_habit_path(habit_for_log),
+                  method: :patch,
+                  class: "btn btn-success",
+                  form: { style: 'display: inline;' } %>
   </div>
-  <hr>
 <% end %>
