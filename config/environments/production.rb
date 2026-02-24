@@ -26,7 +26,7 @@ Rails.application.configure do
   # ================================
 
   config.action_mailer.default_url_options = {
-    host: 'my-graduation-app.onrender.com',
+    host: 'my-graduation-app-1.onrender.com',
     protocol: 'https'
   }
 
