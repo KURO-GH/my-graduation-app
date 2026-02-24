@@ -33,7 +33,12 @@ class StudyLogsController < ApplicationController
     authorize @study_log
 
     # 投稿ごとに独立した Habit を作成して紐付け
-    @study_log.build_habit(user: current_user, completed: false)
+    @study_log.build_habit(
+      user: current_user,
+      completed: false,
+      name: @study_log.title,
+      category: @study_log.category
+    )
 
     if @study_log.save
       redirect_to study_logs_path, notice: '学習記録を投稿しました'
