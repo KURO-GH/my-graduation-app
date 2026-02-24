@@ -31,16 +31,18 @@ Rails.application.configure do
     protocol: 'https'
   }
 
-  # From アドレス（SendGridで検証済み）
-  config.action_mailer.default_options = { from: 'k.s06020608@gmail.com' }
+  # 送信元アドレス（SendGridで検証済みのもの）
+  config.action_mailer.default_options = {
+    from: 'k.s06020608@gmail.com'
+  }
 
-  # SMTP 設定（SendGrid）
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
+
   config.action_mailer.smtp_settings = {
-    user_name: 'apikey', # SendGrid 固定
-    password: ENV['SENDGRID_API_KEY'], # APIキーを環境変数から
+    user_name: 'apikey',
+    password: ENV['SENDGRID_API_KEY'],
     domain: 'my-graduation-app.onrender.com',
     address: 'smtp.sendgrid.net',
     port: 587,
@@ -51,7 +53,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   # ================================
-  # ActiveJob（本番でメールを確実に送る）
+  # ActiveJob
   # ================================
   config.active_job.queue_adapter = :async
 
