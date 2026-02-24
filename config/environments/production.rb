@@ -22,35 +22,28 @@ Rails.application.configure do
   config.log_tags  = [:request_id]
 
   # ================================
-  # Action Mailer（Devise / SendGrid）
+  # Action Mailer（SendGrid API方式）
   # ================================
 
-  # URL 設定（Devise のリンク用）
   config.action_mailer.default_url_options = {
     host: 'my-graduation-app.onrender.com',
     protocol: 'https'
   }
 
-  # 送信元アドレス（SendGridで検証済みのもの）
   config.action_mailer.default_options = {
     from: 'k.s06020608@gmail.com'
   }
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :smtp
-
-  config.action_mailer.smtp_settings = {
-    user_name: 'apikey',
-    password: ENV['SENDGRID_API_KEY'],
-    domain: 'my-graduation-app.onrender.com',
-    address: 'smtp.sendgrid.net',
-    port: 587,
-    authentication: :plain,
-    enable_starttls_auto: true
-  }
-
   config.action_mailer.perform_caching = false
+
+  config.action_mailer.delivery_method = :sendgrid_actionmailer
+
+  config.action_mailer.sendgrid_actionmailer_settings = {
+    api_key: ENV['SENDGRID_API_KEY'],
+    raise_delivery_errors: true
+  }
 
   # ================================
   # ActiveJob

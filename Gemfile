@@ -81,3 +81,5 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 
 gem 'dotenv-rails', groups: [:development, :test]
+
+gem 'sendgrid-actionmailer'

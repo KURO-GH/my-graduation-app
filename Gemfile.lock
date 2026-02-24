@@ -343,6 +343,9 @@ GEM
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
+    sendgrid-actionmailer (3.2.0)
+      mail (~> 2.7)
+      sendgrid-ruby (~> 6.4)
     sendgrid-ruby (6.7.0)
       ruby_http_client (~> 3.4)
     snaky_hash (2.0.3)
@@ -424,6 +427,7 @@ DEPENDENCIES
   rubocop
   rubocop-rails
   selenium-webdriver
+  sendgrid-actionmailer
   sendgrid-ruby
   sprockets-rails
   stimulus-rails
