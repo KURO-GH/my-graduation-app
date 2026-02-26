@@ -18,4 +18,12 @@ ja:
     messages:
       not_saved: "保存できませんでした。%{count} 件のエラーがあります。"
       not_found: "メールアドレスが存在しません"
-      
+
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              too_short: "は%{count}文字以上で入力してください"
+              
