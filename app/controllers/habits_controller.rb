@@ -1,14 +1,14 @@
 class HabitsController < ApplicationController
   def index
-    @habits = Habit.all.order(created_at: :desc)
+    @habits = current_user.habits.order(created_at: :desc)
   end
 
   def review
-    # カテゴリ一覧取得（フォーム用）
-    @categories = Habit.pluck(:category).uniq
+    # ログインユーザーのHabitだけ取得
+    habits = current_user.habits
 
-    # ベースのHabit取得
-    habits = Habit.all
+    # カテゴリ一覧（ユーザー分だけ）
+    @categories = habits.pluck(:category).uniq
 
     # カテゴリで絞り込む
     habits = habits.where(category: params[:category]) if params[:category].present?
@@ -42,9 +42,8 @@ class HabitsController < ApplicationController
     @month_completion_rate = month_habits.any? ? (completed_count_month.to_f / month_habits.size * 100).round : 0
   end
 
-  # 完了/未完を切り替えるアクション
   def toggle_complete
-    @habit = Habit.find(params[:id])
+    @habit = current_user.habits.find(params[:id])
     @habit.update(completed: !@habit.completed)
     redirect_back(fallback_location: habits_path)
   end
