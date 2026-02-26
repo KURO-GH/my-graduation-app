@@ -2,124 +2,138 @@
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
  *
- *= require_tree .
+/*
+/*
  *= require_self
+ *= require_tree .
  */
 
-/* ===== ベース ===== */
-body {
-  background-color: #f5f7fb;
-  font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
-  color: #333;
+/* ===== リセット ===== */
+html, body {
+  min-height: 100vh;
   margin: 0;
   padding: 0;
+}
+
+/* ===== ベース背景（しっかり青） ===== */
+body {
+  background: linear-gradient(135deg, #4a90e2 0%, #007bff 50%, #00c6ff 100%);
+  font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+  color: #ffffff;
 }
 
 /* ===== タイトル ===== */
 h1 {
   text-align: center;
-  margin-bottom: 24px;
-  font-weight: bold;
+  margin-bottom: 32px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
+
+/* ===== コンテンツ中央寄せ ===== */
+main,
+.container {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 20px;
 }
 
 /* ===== 学習記録カード ===== */
 .study-log {
-  background-color: #ffffff;
-  border-radius: 10px;
-  padding: 16px;
-  margin-bottom: 16px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.92);
+  color: #2c3e50;
+  border-radius: 20px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+}
+
+.study-log:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
 }
 
 /* ===== ボタン共通 ===== */
-.btn,
-.hero-buttons .btn-google,
-.btn-google-form input[type="submit"] {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 10px 20px !important;
-  font-size: 13px !important;
-  font-weight: bold !important;
-  border-radius: 20px !important;
-  border: none !important;
-  cursor: pointer !important;
-  text-align: center !important;
-  line-height: normal !important;
-  vertical-align: middle !important;
-  text-decoration: none !important;
-  box-sizing: border-box !important;
-  margin: 0 !important;
-  transition: all 0.2s ease-in-out;
+button.btn,
+input.btn,
+a.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 26px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+/* ===== メインボタン ===== */
+button.btn-signup,
+a.btn-signup,
+button.btn-login,
+a.btn-login,
+button.btn-google,
+a.btn-google {
+  background: #ffffff;
+  color: #007bff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+button.btn-signup:hover,
+a.btn-signup:hover,
+button.btn-login:hover,
+a.btn-login:hover,
+button.btn-google:hover,
+a.btn-google:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
 }
 
 /* ===== 編集・削除・戻るボタン ===== */
-.btn-edit {
-  background-color: #6ccf8e !important;
+button.btn-edit,
+a.btn-edit {
+  background: #6ccf8e;
+  color: #ffffff;
 }
 
-.btn-delete {
-  background-color: #f28b82 !important;
+button.btn-delete,
+a.btn-delete {
+  background: #f28b82;
+  color: #ffffff;
 }
 
-.btn-back {
-  background-color: #b0b8c1 !important;
-}
-
-/* ===== 新規登録・ログイン・Googleログインボタン ===== */
-.btn-signup {
-  background-color: #6ccf8e !important;
-  color: #fff !important;
-}
-
-.btn-signup:hover {
-  background-color: #57b375 !important;
-}
-
-.btn-login {
-  background-color: #4285f4 !important;
-  color: #fff !important;
-}
-
-.btn-login:hover {
-  background-color: #357ae8 !important;
-}
-
-.btn-google,
-.hero-buttons .btn-google,
-.btn-google-form input[type="submit"] {
-  background-color: #4285f4 !important;
-  color: #fff !important;
-}
-
-.btn-google:hover,
-.hero-buttons .btn-google:hover,
-.btn-google-form input[type="submit"]:hover {
-  background-color: #357ae8 !important;
+button.btn-back,
+a.btn-back {
+  background: #b0b8c1;
+  color: #ffffff;
 }
 
 /* ===== heroセクション ===== */
 .hero {
   text-align: center;
-  margin-top: 80px;
+  margin-top: 120px;
 }
 
 .hero-text {
-  color: #666;
-  margin-bottom: 32px;
-  font-size: 16px;
+  margin-bottom: 36px;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  color: #eaf6ff;
 }
 
-/* ===== hero-buttons 配置 ===== */
+/* ===== heroボタン配置 ===== */
 .hero-buttons {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  gap: 12px;
+  gap: 16px;
 }
 
 .hero-buttons form {
-  display: inline-block;
   margin: 0;
 }
