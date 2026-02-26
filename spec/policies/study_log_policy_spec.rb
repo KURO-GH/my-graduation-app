@@ -4,13 +4,21 @@ RSpec.describe StudyLogPolicy, type: :policy do
   let(:user) { User.create!(email: 'test@example.com', password: 'password') }
   let(:other_user) { User.create!(email: 'other@example.com', password: 'password') }
 
-  let(:record) { StudyLog.create!(title: 'test', content: 'content', user: user) }
+  let(:record) do
+    StudyLog.create!(
+      title: 'test',
+      content: 'content',
+      category: '学習',
+      user: user
+    )
+  end
 
   describe 'Scope' do
     it '自分の学習記録だけ取得できる' do
       other_record = StudyLog.create!(
         title: 'other',
         content: 'content',
+        category: '学習',
         user: other_user
       )
 

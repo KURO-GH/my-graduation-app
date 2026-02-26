@@ -33,7 +33,7 @@ RSpec.describe "StudyLogs", type: :request do
     context "ログインしていない場合" do
       it "投稿できない" do
         post study_logs_path, params: {
-          study_log: { title: "test", content: "content" }
+          study_log: { title: "test", content: "content", category: "学習" }
         }
         expect(response).to redirect_to(new_user_session_path)
       end
@@ -47,7 +47,7 @@ RSpec.describe "StudyLogs", type: :request do
       it "投稿が作成される" do
         expect {
           post study_logs_path, params: {
-            study_log: { title: "test", content: "content" }
+            study_log: { title: "test", content: "content", category: "学習" }
           }
         }.to change(StudyLog, :count).by(1)
       end
@@ -58,14 +58,22 @@ RSpec.describe "StudyLogs", type: :request do
     context "他人の投稿を編集しようとした場合" do
       let(:owner) { User.create!(email: "owner@example.com", password: "password") }
       let(:other_user) { User.create!(email: "other@example.com", password: "password") }
-      let(:study_log) { StudyLog.create!(title: "test", content: "content", user: owner) }
+
+      let(:study_log) do
+        StudyLog.create!(
+          title: "test",
+          content: "content",
+          category: "学習",
+          user: owner
+        )
+      end
 
       before { sign_in other_user }
 
       it "RecordNotFoundが発生する" do
-  expect {
-    get edit_study_log_path(study_log)
-  }.to raise_error(ActiveRecord::RecordNotFound)
+        expect {
+          get edit_study_log_path(study_log)
+        }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end
