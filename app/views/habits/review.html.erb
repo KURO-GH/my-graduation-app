@@ -18,13 +18,13 @@
 <!-- 今週／今月の達成率 -->
 <div style="margin-bottom: 2rem;">
   <p>今週の達成率: <%= @week_completion_rate %>%</p>
-  <div style="background-color: #e9ecef; width: 100%; height: 20px; border-radius: 4px;">
-    <div style="width: <%= @week_completion_rate %>%; background-color: #28a745; height: 100%; border-radius: 4px;"></div>
+  <div class="week-completion-bar-wrapper">
+    <div class="week-completion-bar" style="width: <%= @week_completion_rate %>%"></div>
   </div>
 
   <p>今月の達成率: <%= @month_completion_rate %>%</p>
-  <div style="background-color: #e9ecef; width: 100%; height: 20px; border-radius: 4px;">
-    <div style="width: <%= @month_completion_rate %>%; background-color: #007bff; height: 100%; border-radius: 4px;"></div>
+  <div class="month-completion-bar-wrapper">
+    <div class="month-completion-bar" style="width: <%= @month_completion_rate %>%"></div>
   </div>
 </div>
 

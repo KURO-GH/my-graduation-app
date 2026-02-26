@@ -2,8 +2,6 @@
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
  *
-/*
-/*
  *= require_self
  *= require_tree .
  */
@@ -136,4 +134,39 @@ a.btn-back {
 
 .hero-buttons form {
   margin: 0;
+}
+
+/* ===== 今週／今月の達成率バー ===== */
+
+/* 今週 */
+.week-completion-bar-wrapper {
+  background-color: rgba(233, 236, 239, 0.6); /* 薄いグレー */
+  border-radius: 8px;
+  height: 16px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.week-completion-bar {
+  background-color: #28a745 !important; /* 緑 */
+  height: 16px;
+  border-radius: 8px;
+  transition: width 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 今月 */
+.month-completion-bar-wrapper {
+  background-color: rgba(255, 255, 255, 0.3); /* 薄い白 */
+  border-radius: 8px;
+  height: 16px;
+  overflow: hidden;
+}
+
+.month-completion-bar {
+  background-color: #ff7f50 !important; /* オレンジ */
+  height: 16px;
+  border-radius: 8px;
+  transition: width 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
