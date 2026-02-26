@@ -1,10 +1,8 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
+ * This is a manifest file that'll be compiled into application.css
  *= require_self
  *= require_tree .
- */
+*/
 
 /* ===== リセット ===== */
 html, body {
@@ -13,7 +11,7 @@ html, body {
   padding: 0;
 }
 
-/* ===== ベース背景（しっかり青） ===== */
+/* ===== ベース背景 ===== */
 body {
   background: linear-gradient(135deg, #4a90e2 0%, #007bff 50%, #00c6ff 100%);
   font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
@@ -37,7 +35,7 @@ main,
   padding: 0 20px;
 }
 
-/* ===== 学習記録カード ===== */
+/* ===== カード ===== */
 .study-log {
   background: rgba(255, 255, 255, 0.92);
   color: #2c3e50;
@@ -64,54 +62,86 @@ a.btn {
   font-size: 14px;
   font-weight: 600;
   border-radius: 30px;
-  border: none;
   cursor: pointer;
   text-decoration: none;
   transition: all 0.25s ease;
 }
 
-/* ===== メインボタン ===== */
-button.btn-signup,
-a.btn-signup,
-button.btn-login,
+/* ===== ログインボタン ===== */
 a.btn-login,
-button.btn-google,
-a.btn-google {
-  background: #ffffff;
+input.btn-login {
+  background-color: #ffffff;
   color: #007bff;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  border: 2px solid #007bff;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
-button.btn-signup:hover,
-a.btn-signup:hover,
-button.btn-login:hover,
 a.btn-login:hover,
-button.btn-google:hover,
+input.btn-login:hover {
+  transform: translateY(-3px);
+  background-color: #f0f8ff;
+}
+
+/* ===== 新規登録ボタン ===== */
+a.btn-signup,
+input.btn-signup {
+  background-color: #ffffff;
+  color: #007bff;
+  border: 2px solid #007bff;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+a.btn-signup:hover,
+input.btn-signup:hover {
+  transform: translateY(-3px);
+  background-color: #f0f8ff;
+}
+
+/* ===== Googleログイン ===== */
+a.btn-google {
+  background-color: #ffffff;
+  color: #4285F4;
+  border: 2px solid #4285F4;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
 a.btn-google:hover {
   transform: translateY(-3px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  background-color: #eef4ff;
 }
 
-/* ===== 編集・削除・戻るボタン ===== */
-button.btn-edit,
-a.btn-edit {
-  background: #6ccf8e;
+/* ===== パスワード忘れ ===== */
+a.btn-info {
+  background-color: #f28b82;
   color: #ffffff;
+  border: 2px solid #f28b82;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-button.btn-delete,
-a.btn-delete {
-  background: #f28b82;
-  color: #ffffff;
+a.btn-info:hover {
+  transform: translateY(-3px);
+  background-color: #ff9e9e;
 }
 
-button.btn-back,
+/* ===== 戻る ===== */
 a.btn-back {
-  background: #b0b8c1;
-  color: #ffffff;
+  background-color: #b0b8c1;
+  color: #2c3e50;
+  border: 2px solid #b0b8c1;
 }
 
-/* ===== heroセクション ===== */
+a.btn-back:hover {
+  transform: translateY(-3px);
+}
+
+/* ===== トップページボタン ===== */
+a.btn-edit {
+  background-color: #6ccf8e;
+  color: #ffffff;
+  border: 2px solid #6ccf8e;
+}
+
+/* ===== hero ===== */
 .hero {
   text-align: center;
   margin-top: 120px;
@@ -124,7 +154,6 @@ a.btn-back {
   color: #eaf6ff;
 }
 
-/* ===== heroボタン配置 ===== */
 .hero-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -136,70 +165,90 @@ a.btn-back {
   margin: 0;
 }
 
-/* ===== 今週／今月の達成率バー ===== */
-
-/* 今週 */
-.week-completion-bar-wrapper {
-  background-color: rgba(233, 236, 239, 0.6); /* 薄いグレー */
+/* ===== 進捗バー ===== */
+.week-completion-bar-wrapper,
+.month-completion-bar-wrapper {
   border-radius: 8px;
   height: 16px;
   overflow: hidden;
+}
+
+.week-completion-bar-wrapper {
+  background-color: rgba(233, 236, 239, 0.6);
   margin-bottom: 12px;
 }
 
 .week-completion-bar {
-  background-color: #28a745 !important; /* 緑 */
-  height: 16px;
-  border-radius: 8px;
+  background-color: #28a745;
+  height: 100%;
   transition: width 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* 今月 */
 .month-completion-bar-wrapper {
-  background-color: rgba(255, 255, 255, 0.3); /* 薄い白 */
-  border-radius: 8px;
-  height: 16px;
-  overflow: hidden;
+  background-color: rgba(255,255,255,0.3);
 }
 
 .month-completion-bar {
-  background-color: #ff7f50 !important; /* オレンジ */
-  height: 16px;
-  border-radius: 8px;
+  background-color: #ff7f50;
+  height: 100%;
   transition: width 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* フィルターフォーム */
-.filter-form {
-  margin-bottom: 1rem;
-}
-.select-input {
-  margin-right: 0.5rem;
-}
-
-/* 習慣テーブル */
+/* ===== テーブル ===== */
 .habits-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 1.5rem;
-  color: #2c3e50; /* カテゴリ文字も見やすく */
-}
-.habits-table th {
-  background-color: #f1f1f1;
-  padding: 0.5rem;
-  border: 1px solid #ddd;
   color: #2c3e50;
 }
+
+.habits-table th,
 .habits-table td {
   padding: 0.5rem;
   border: 1px solid #ddd;
-  color: #2c3e50; /* 文字色を統一 */
 }
+
+.habits-table th {
+  background-color: #f1f1f1;
+}
+
 .habits-table tr.completed {
   background-color: #d4edda;
 }
+
 .habits-table tr.incomplete {
   background-color: #f8d7da;
+}
+
+/* ===== 認証ページのボタン間隔 ===== */
+.auth-links .btn {
+  margin-bottom: 14px;
+}
+
+/* ===== 習慣の振り返りボタン（オレンジ） ===== */
+a.btn-review {
+  background: linear-gradient(135deg, #ff9a3c, #ff6a00);
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 12px 30px rgba(255, 106, 0, 0.4);
+}
+
+a.btn-review:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(255, 106, 0, 0.5);
+}
+
+/* ===== 削除ボタン ===== */
+a.btn-delete,
+button.btn-delete {
+  background-color: #e74c3c;
+  color: #ffffff;
+  border: 2px solid #e74c3c;
+  box-shadow: 0 8px 20px rgba(231, 76, 60, 0.3);
+}
+
+a.btn-delete:hover,
+button.btn-delete:hover {
+  transform: translateY(-3px);
+  background-color: #ff6b5e;
 }

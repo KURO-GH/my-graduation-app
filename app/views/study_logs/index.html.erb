@@ -10,7 +10,10 @@
 <!-- 新規投稿ボタン + 振り返りリンク -->
 <div style="margin-top: 1rem; margin-bottom: 2rem;">
   <%= link_to '＋ 新規投稿', new_study_log_path, class: 'btn btn-edit' %>
-  <%= link_to "習慣の振り返りを見る", review_habits_path, class: "btn btn-primary", style: "margin-left: 1rem;" %>
+  <%= link_to "習慣の振り返りを見る",
+            review_habits_path,
+            class: "btn btn-review",
+            style: "margin-left: 1rem;" %>
 </div>
 
 <hr>

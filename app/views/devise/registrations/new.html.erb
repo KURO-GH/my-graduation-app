@@ -17,22 +17,34 @@
 
       <div>
         <%= f.label :email %>
-        <%= f.email_field :email %>
+        <%= f.email_field :email, class: "form-input" %>
       </div>
 
       <div>
         <%= f.label :password %>
-        <%= f.password_field :password %>
+        <%= f.password_field :password, class: "form-input" %>
       </div>
 
       <div>
         <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation %>
+        <%= f.password_field :password_confirmation, class: "form-input" %>
       </div>
 
       <div style="margin-top: 16px;">
-        <%= f.submit '登録する', class: 'btn btn-edit' %>
+        <!-- 登録ボタン -->
+        <%= f.submit '登録する', class: 'btn btn-signup' %>
       </div>
     <% end %>
+
+    <div style="margin-top: 12px;">
+      <!-- ログインはこちら -->
+      <%= link_to "ログインはこちら", new_user_session_path, class: "btn btn-back" %>
+    </div>
+
+    <div style="margin-top: 12px;">
+      <!-- Googleでログイン -->
+      <%= link_to "Googleでログイン", user_google_oauth2_omniauth_authorize_path, class: "btn btn-google", data: { turbo: false } %>
+    </div>
+
   </div>
 </div>
