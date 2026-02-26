@@ -1,5 +1,11 @@
-<h1>学習記録 編集</h1>
+<h1>学習記録を編集</h1>
 
-<%= render 'form', study_log: @study_log %>
+<div class="study-log">
+  <%= render "form", study_log: @study_log %>
 
-<%= link_to '一覧に戻る', study_logs_path %>
+  <div style="margin-top: 1.5rem;">
+    <%= link_to "一覧に戻る",
+                study_logs_path,
+                class: "btn btn-back" %>
+  </div>
+</div>

@@ -252,3 +252,40 @@ button.btn-delete:hover {
   transform: translateY(-3px);
   background-color: #ff6b5e;
 }
+
+/* ===== フォームグループ ===== */
+.form-group {
+  margin-bottom: 18px;
+}
+
+/* ===== 入力フィールド ===== */
+input[type="text"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px 14px;
+  margin-top: 6px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+/* ===== エラー表示 ===== */
+.form-errors {
+  background-color: #ffe5e5;
+  color: #c0392b;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.form-errors ul {
+  margin: 0;
+  padding-left: 20px;
+}

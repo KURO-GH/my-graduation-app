@@ -1,5 +1,5 @@
 <% if study_log.errors.any? %>
-  <div style="color: red;">
+  <div class="form-errors">
     <ul>
       <% study_log.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -9,22 +9,27 @@
 <% end %>
 
 <%= form_with model: study_log, local: true do |f| %>
-  <div>
-    <%= f.label :title, 'タイトル' %><br>
+
+  <div class="form-group">
+    <%= f.label :title, 'タイトル' %>
     <%= f.text_field :title %>
   </div>
 
-  <div>
-    <%= f.label :content, '内容' %><br>
+  <div class="form-group">
+    <%= f.label :content, '内容' %>
     <%= f.text_area :content %>
   </div>
 
-  <div>
-    <%= f.label :category, 'カテゴリ' %><br>
-    <%= f.select :category, ["学習", "仕事", "趣味", "その他"], prompt: "カテゴリを選択" %>
+  <div class="form-group">
+    <%= f.label :category, 'カテゴリ' %>
+    <%= f.select :category,
+                 ["学習", "仕事", "趣味", "その他"],
+                 prompt: "カテゴリを選択" %>
   </div>
 
-  <div>
-    <%= f.submit study_log.persisted? ? '更新する' : '投稿する' %>
+  <div style="margin-top: 1.5rem;">
+    <%= f.submit study_log.persisted? ? '更新する' : '投稿する',
+                 class: "btn btn-edit" %>
   </div>
+
 <% end %>
