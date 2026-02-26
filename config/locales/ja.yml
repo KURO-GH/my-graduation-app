@@ -2,22 +2,30 @@ ja:
   activerecord:
     models:
       study_log: 学習記録
+      user: ユーザー
+
     attributes:
       study_log:
         title: タイトル
         content: 内容
+        category: カテゴリ
+
       user:
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード（確認）
 
   errors:
+    format: "%{attribute}%{message}"
+
     messages:
       blank: "を入力してください"
       too_long: "は%{count}文字以内で入力してください"
       confirmation: "が一致しません"
       taken: "はすでに使用されています"
+
   devise:
     failure:
       invalid: "メールアドレスまたはパスワードが違います"
       not_found_in_database: "メールアドレスまたはパスワードが違います"
+      
