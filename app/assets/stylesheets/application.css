@@ -170,3 +170,36 @@ a.btn-back {
   transition: width 0.3s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+/* フィルターフォーム */
+.filter-form {
+  margin-bottom: 1rem;
+}
+.select-input {
+  margin-right: 0.5rem;
+}
+
+/* 習慣テーブル */
+.habits-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+  color: #2c3e50; /* カテゴリ文字も見やすく */
+}
+.habits-table th {
+  background-color: #f1f1f1;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  color: #2c3e50;
+}
+.habits-table td {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  color: #2c3e50; /* 文字色を統一 */
+}
+.habits-table tr.completed {
+  background-color: #d4edda;
+}
+.habits-table tr.incomplete {
+  background-color: #f8d7da;
+}

@@ -1,22 +1,22 @@
 <h1>習慣の振り返り</h1>
 
-<%= link_to "← 学習記録一覧に戻る", study_logs_path, class: "btn btn-secondary", style: "margin-bottom: 1rem;" %>
+<%= link_to "← 学習記録一覧に戻る", study_logs_path, class: "btn btn-back", style: "margin-bottom: 1rem;" %>
 
 <!-- フィルターフォーム -->
 <%= form_with url: review_habits_path, method: :get, local: true do |f| %>
-  <div style="margin-bottom: 1rem;">
+  <div class="filter-form">
     <%= f.label :category, "カテゴリで絞り込み" %>
-    <%= f.select :category, options_for_select(@categories, params[:category]), include_blank: "すべて" %>
+    <%= f.select :category, options_for_select(@categories, params[:category]), include_blank: "すべて", class: "select-input" %>
 
     <%= f.label :status, "達成状況で絞り込み" %>
-    <%= f.select :status, options_for_select([["すべて", ""], ["完了", "completed"], ["未完", "incomplete"]], params[:status]) %>
+    <%= f.select :status, options_for_select([["すべて", ""], ["完了", "completed"], ["未完", "incomplete"]], params[:status]), class: "select-input" %>
 
     <%= f.submit "表示", class: "btn btn-primary" %>
   </div>
 <% end %>
 
 <!-- 今週／今月の達成率 -->
-<div style="margin-bottom: 2rem;">
+<div class="completion-rates">
   <p>今週の達成率: <%= @week_completion_rate %>%</p>
   <div class="week-completion-bar-wrapper">
     <div class="week-completion-bar" style="width: <%= @week_completion_rate %>%"></div>
@@ -31,20 +31,20 @@
 <!-- 日付ごとの習慣リスト -->
 <% @habits_by_date.each do |date, habits| %>
   <h2><%= date.strftime("%Y/%m/%d") %></h2>
-  <table style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem;">
+  <table class="habits-table">
     <thead>
-      <tr style="background-color: #f1f1f1;">
-        <th style="padding: 0.5rem; border: 1px solid #ddd;">習慣名</th>
-        <th style="padding: 0.5rem; border: 1px solid #ddd;">カテゴリ</th>
-        <th style="padding: 0.5rem; border: 1px solid #ddd;">達成状況</th>
+      <tr>
+        <th>習慣名</th>
+        <th>カテゴリ</th>
+        <th>達成状況</th>
       </tr>
     </thead>
     <tbody>
       <% habits.each do |habit| %>
-        <tr style="background-color: <%= habit.completed ? '#d4edda' : '#f8d7da' %>;">
-          <td style="padding: 0.5rem; border: 1px solid #ddd;"><%= habit.name %></td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;"><%= habit.category %></td>
-          <td style="padding: 0.5rem; border: 1px solid #ddd;"><%= habit.completed ? "✅ 完了" : "❌ 未完" %></td>
+        <tr class="<%= habit.completed ? 'completed' : 'incomplete' %>">
+          <td><%= habit.name %></td>
+          <td><%= habit.category %></td>
+          <td><%= habit.completed ? "✅ 完了" : "❌ 未完" %></td>
         </tr>
       <% end %>
     </tbody>
