@@ -24,9 +24,10 @@
 
       <%= link_to "Googleでログイン",
             user_google_oauth2_omniauth_authorize_path,
-            data: { turbo: false } %><br />
+            class: "btn btn-google",
+            data: { turbo: false } %>
+
+      <%= link_to "使い方を見る", home_how_to_use_path, class: "btn btn-back" %>
     </div>
-    <%= link_to "使い方を見る", home_how_to_use_path, class: "btn btn-info", style: "margin-top: 1rem;" %>
   <% end %>
-
-
+</div>
