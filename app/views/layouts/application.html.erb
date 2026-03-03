@@ -30,5 +30,11 @@
     <% end %>
 
     <%= yield %>
+
+    <% unless current_page?(privacy_policy_path) %>
+      <footer style="text-align: center; padding: 16px; margin-top: 24px;">
+        <%= link_to "プライバシーポリシー", privacy_policy_path %>
+      </footer>
+    <% end %>
   </body>
 </html>

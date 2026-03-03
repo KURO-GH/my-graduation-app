@@ -2,9 +2,13 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  # Deviseの設定
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
+
+  # プライバシーポリシー
+  get 'privacy_policy', to: 'static_pages#privacy_policy'
 
   # トップページ
   root 'home#index'
