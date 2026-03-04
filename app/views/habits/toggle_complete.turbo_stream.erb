@@ -1,0 +1,27 @@
+<%= turbo_stream.replace "habit-#{@habit.id}" do %>
+  <tr id="habit-<%= @habit.id %>" class="<%= @habit.completed ? 'completed' : 'incomplete' %>">
+    <td><%= @habit.name %></td>
+    <td><%= @habit.category %></td>
+    <td class="habit-status"><%= @habit.completed ? "✅ 完了" : "❌ 未完" %></td>
+    <td>
+      <%= button_to (@habit.completed ? '完了解除' : '完了'),
+                    toggle_complete_habit_path(@habit),
+                    method: :patch,
+                    class: "btn btn-complete" %>
+    </td>
+  </tr>
+<% end %>
+
+<%= turbo_stream.replace "completion-rates" do %>
+  <div id="completion-rates">
+    <p>今週の達成率: <%= @week_completion_rate %>%</p>
+    <div class="week-completion-bar-wrapper">
+      <div class="week-completion-bar" style="width: <%= @week_completion_rate %>%"></div>
+    </div>
+
+    <p>今月の達成率: <%= @month_completion_rate %>%</p>
+    <div class="month-completion-bar-wrapper">
+      <div class="month-completion-bar" style="width: <%= @month_completion_rate %>%"></div>
+    </div>
+  </div>
+<% end %>

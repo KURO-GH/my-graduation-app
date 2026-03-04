@@ -2,7 +2,6 @@
 
 <%= link_to "← 学習記録一覧に戻る", study_logs_path, class: "btn btn-back", style: "margin-bottom: 1rem;" %>
 
-<!-- フィルターフォーム -->
 <%= form_with url: review_habits_path, method: :get, local: true do |f| %>
   <div class="filter-form">
     <%= f.label :category, "カテゴリで絞り込み" %>
@@ -15,8 +14,8 @@
   </div>
 <% end %>
 
-<!-- 今週／今月の達成率 -->
-<div class="completion-rates">
+<!-- ★ここに id を追加 -->
+<div id="completion-rates">
   <p>今週の達成率: <%= @week_completion_rate %>%</p>
   <div class="week-completion-bar-wrapper">
     <div class="week-completion-bar" style="width: <%= @week_completion_rate %>%"></div>
@@ -28,7 +27,6 @@
   </div>
 </div>
 
-<!-- 日付ごとの習慣リスト -->
 <% @habits_by_date.each do |date, habits| %>
   <h2><%= date.strftime("%Y/%m/%d") %></h2>
   <table class="habits-table">
@@ -37,14 +35,21 @@
         <th>習慣名</th>
         <th>カテゴリ</th>
         <th>達成状況</th>
+        <th>操作</th>
       </tr>
     </thead>
     <tbody>
       <% habits.each do |habit| %>
-        <tr class="<%= habit.completed ? 'completed' : 'incomplete' %>">
+        <tr id="habit-<%= habit.id %>" class="<%= habit.completed ? 'completed' : 'incomplete' %>">
           <td><%= habit.name %></td>
           <td><%= habit.category %></td>
-          <td><%= habit.completed ? "✅ 完了" : "❌ 未完" %></td>
+          <td class="habit-status"><%= habit.completed ? "✅ 完了" : "❌ 未完" %></td>
+          <td>
+            <%= button_to (habit.completed ? '完了解除' : '完了'),
+                          toggle_complete_habit_path(habit),
+                          method: :patch,
+                          class: "btn btn-complete" %>
+          </td>
         </tr>
       <% end %>
     </tbody>

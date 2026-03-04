@@ -34,15 +34,6 @@
                   data: { confirm: '削除しますか？' },
                   class: 'btn btn-delete',
                   form: { style: 'display: inline; margin-right: 0.5rem;' } %>
-
-    <!-- 投稿ごとの完了ボタン -->
-    <% if log.habit %>
-      <%= button_to (log.habit.completed ? "完了解除" : "完了"),
-                    toggle_complete_habit_path(log.habit),
-                    method: :patch,
-                    class: "btn btn-success",
-                    form: { style: 'display: inline;' } %>
-    <% end %>
   </div>
   <hr>
 <% end %>

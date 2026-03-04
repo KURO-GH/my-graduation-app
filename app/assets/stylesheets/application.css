@@ -289,3 +289,35 @@ textarea {
   margin: 0;
   padding-left: 20px;
 }
+
+/* app/assets/stylesheets/application.css の最後あたりに追加 */
+.habits-table {
+  table-layout: fixed; /* 列幅を均等に固定 */
+  width: 100%; /* テーブルを画面幅いっぱいに */
+}
+
+.habits-table th,
+.habits-table td {
+  text-align: center; /* 中央揃え */
+  overflow-wrap: break-word; /* 長い文字列を折り返す */
+}
+
+.habits-table th:nth-child(1),
+.habits-table td:nth-child(1) {
+  width: 40%; /* 習慣名の列幅 */
+}
+
+.habits-table th:nth-child(2),
+.habits-table td:nth-child(2) {
+  width: 30%; /* カテゴリ列 */
+}
+
+.habits-table th:nth-child(3),
+.habits-table td:nth-child(3) {
+  width: 20%; /* 達成状況列 */
+}
+
+.habits-table th:nth-child(4),
+.habits-table td:nth-child(4) {
+  width: 10%; /* 操作欄（完了ボタン）列 */
+}

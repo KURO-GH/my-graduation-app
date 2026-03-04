@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>MyGraduationApp</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+  <title>MyGraduationApp</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
 
-    <%# OGP %>
-    <meta property="og:title" content="学習記録アプリ" />
-    <meta property="og:description" content="日々の学習を手軽に記録できるシンプルな学習記録アプリです。" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://my-graduation-app.onrender.com/" />
-    <meta property="og:image" content="<%= image_url('ogp.png') %>" />
+  <!-- OGP -->
+  <meta property="og:title" content="学習記録アプリ" />
+  <meta property="og:description" content="日々の学習を手軽に記録できるシンプルな学習記録アプリです。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://my-graduation-app.onrender.com/" />
+  <meta property="og:image" content="<%= image_url('ogp.png') %>" />
 
-    <%# Twitter %>
-    <meta name="twitter:card" content="summary_large_image" />
-  </head>
+  <meta name="twitter:card" content="summary_large_image" />
+    <%= javascript_importmap_tags %>
+</head>
 
   <body>
     <% if user_signed_in? %>
