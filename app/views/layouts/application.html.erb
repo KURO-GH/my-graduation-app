@@ -58,7 +58,7 @@
              position:fixed;
              top:70px;
              right:16px;
-             width:260px;
+             width:300px;
              max-height:300px;
              overflow-y:auto;
              background:white;
@@ -72,13 +72,8 @@
         <% current_user.notifications.order(created_at: :desc).each do |n| %>
 
           <div class="notification-item <%= 'unread' unless n.read %>"
-               data-notification-id="<%= n.id %>"
-               style="
-                 padding:10px;
-                 border-bottom:1px solid #eee;
-                 cursor:pointer;
-                 font-weight:<%= 'bold' unless n.read %>;
-               ">
+          data-notification-id="<%= n.id %>">
+          <span style="margin-right:6px;">📘</span>
             <%= n.message %>
           </div>
 

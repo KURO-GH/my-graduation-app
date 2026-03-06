@@ -200,25 +200,45 @@ a.btn-edit {
   border-collapse: collapse;
   margin-bottom: 1.5rem;
   color: #2c3e50;
+  table-layout: fixed;
 }
 
 .habits-table th,
 .habits-table td {
   padding: 0.5rem;
-  border: 1px solid #ddd;
+  text-align: center;
+  overflow-wrap: break-word;
 }
 
 .habits-table th {
+  background-color: #f8f9fa; /* ヘッダー背景を白系に変更 */
+  color: #2c3e50;
+}
+
+.habits-table td {
+  background-color: #ffffff; /* 行背景を白にして見やすく */
+}
+
+.habits-table tr.completed td {
+  background-color: #d4edda; /* 完了行は緑 */
+}
+
+.habits-table tr.incomplete td {
+  background-color: #f8d7da; /* 未完了行は赤 */
+}
+
+.habits-table tr:hover td {
   background-color: #f1f1f1;
 }
 
-.habits-table tr.completed {
-  background-color: #d4edda;
-}
-
-.habits-table tr.incomplete {
-  background-color: #f8d7da;
-}
+.habits-table th:nth-child(1),
+.habits-table td:nth-child(1) { width: 40%; }
+.habits-table th:nth-child(2),
+.habits-table td:nth-child(2) { width: 30%; }
+.habits-table th:nth-child(3),
+.habits-table td:nth-child(3) { width: 20%; }
+.habits-table th:nth-child(4),
+.habits-table td:nth-child(4) { width: 10%; }
 
 /* ===== 認証ページのボタン間隔 ===== */
 .auth-links .btn {
@@ -290,34 +310,28 @@ textarea {
   padding-left: 20px;
 }
 
-/* app/assets/stylesheets/application.css の最後あたりに追加 */
-.habits-table {
-  table-layout: fixed; /* 列幅を均等に固定 */
-  width: 100%; /* テーブルを画面幅いっぱいに */
+/* ===== 通知 ===== */
+#notifications {
+  background: #ffffff;
+  color: #333;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  overflow-y: auto;
 }
 
-.habits-table th,
-.habits-table td {
-  text-align: center; /* 中央揃え */
-  overflow-wrap: break-word; /* 長い文字列を折り返す */
+.notification-item {
+  padding: 12px 14px;
+  border-bottom: 1px solid #ccc; /* 仕切り線を目立たせる */
+  font-size: 14px;
+  line-height: 1.4;
+  cursor: pointer;
 }
 
-.habits-table th:nth-child(1),
-.habits-table td:nth-child(1) {
-  width: 40%; /* 習慣名の列幅 */
+.notification-item:hover {
+  background: #f7f7f7;
 }
 
-.habits-table th:nth-child(2),
-.habits-table td:nth-child(2) {
-  width: 30%; /* カテゴリ列 */
-}
-
-.habits-table th:nth-child(3),
-.habits-table td:nth-child(3) {
-  width: 20%; /* 達成状況列 */
-}
-
-.habits-table th:nth-child(4),
-.habits-table td:nth-child(4) {
-  width: 10%; /* 操作欄（完了ボタン）列 */
+.notification-item.unread {
+  background: #f0f7ff;
+  font-weight: bold;
 }
