@@ -6,7 +6,8 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:google_oauth2]
 
   has_many :study_logs, dependent: :destroy
-  has_many :habits, dependent: :destroy   # ← これ追加
+  has_many :habits, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   def self.from_omniauth(auth)
     user = find_by(provider: auth.provider, uid: auth.uid)

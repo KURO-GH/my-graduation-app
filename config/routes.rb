@@ -29,4 +29,11 @@ Rails.application.routes.draw do
       patch :toggle_complete  # 完了ボタン用
     end
   end
+
+  # 通知の既読用ルーティング
+  resources :notifications, only: [] do
+    member do
+      patch :mark_read
+    end
+  end
 end

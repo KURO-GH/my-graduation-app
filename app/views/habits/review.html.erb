@@ -1,4 +1,15 @@
+<!-- app/views/habits/review.html.erb -->
+
 <h1>習慣の振り返り</h1>
+
+<!-- 通知リスト -->
+<div id="notifications" class="notification-list" style="position: fixed; top: 60px; right: 16px; width: 250px; max-height: 300px; overflow-y: auto; background: white; border: 1px solid #ccc; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); display: none; z-index: 1000;">
+  <% current_user.notifications.order(created_at: :desc).each do |n| %>
+    <div class="notification-item <%= 'unread' unless n.read %>" data-notification-id="<%= n.id %>" style="padding: 0.5rem; border-bottom: 1px solid #eee; cursor: pointer; font-weight: <%= 'bold' unless n.read %>;">
+      <%= n.message %>
+    </div>
+  <% end %>
+</div>
 
 <%= link_to "← 学習記録一覧に戻る", study_logs_path, class: "btn btn-back", style: "margin-bottom: 1rem;" %>
 
@@ -14,18 +25,8 @@
   </div>
 <% end %>
 
-<!-- ★ここに id を追加 -->
-<div id="completion-rates">
-  <p>今週の達成率: <%= @week_completion_rate %>%</p>
-  <div class="week-completion-bar-wrapper">
-    <div class="week-completion-bar" style="width: <%= @week_completion_rate %>%"></div>
-  </div>
-
-  <p>今月の達成率: <%= @month_completion_rate %>%</p>
-  <div class="month-completion-bar-wrapper">
-    <div class="month-completion-bar" style="width: <%= @month_completion_rate %>%"></div>
-  </div>
-</div>
+<!-- 達成率バー：フォームの下、習慣テーブルの上 -->
+<%= render "completion_rates", week_completion_rate: @week_completion_rate, month_completion_rate: @month_completion_rate %>
 
 <% @habits_by_date.each do |date, habits| %>
   <h2><%= date.strftime("%Y/%m/%d") %></h2>
@@ -55,3 +56,27 @@
     </tbody>
   </table>
 <% end %>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const bell = document.getElementById("notification-bell")
+  const list = document.getElementById("notifications")
+  if (!bell || !list) return
+
+  bell.addEventListener("click", () => {
+    const unreadItems = list.querySelectorAll(".notification-item.unread")
+    unreadItems.forEach(item => {
+      item.classList.remove("unread")
+      const id = item.dataset.notificationId
+      fetch(`/notifications/${id}/mark_read`, {
+        method: "PATCH",
+        headers: {
+          "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
+        }
+      })
+    })
+    bell.classList.remove("has-new")
+    list.style.display = list.style.display === "block" ? "none" : "block"
+  })
+})
+</script>

@@ -1,41 +1,145 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>MyGraduationApp</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
+    <title>MyGraduationApp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  <%= javascript_importmap_tags %>
-
-  <!-- OGP -->
-  <meta property="og:title" content="学習記録アプリ" />
-  <meta property="og:description" content="日々の学習を手軽に記録できるシンプルな学習記録アプリです。" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://my-graduation-app.onrender.com/" />
-  <meta property="og:image" content="<%= image_url('ogp.png') %>" />
-
-  <meta name="twitter:card" content="summary_large_image" />
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-</head>
+
+    <!-- OGP -->
+    <meta property="og:title" content="学習記録アプリ" />
+    <meta property="og:description" content="日々の学習を手軽に記録できるシンプルな学習記録アプリです。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://my-graduation-app.onrender.com/" />
+    <meta property="og:image" content="<%= image_url('ogp.png') %>" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
 
   <body>
+
     <% if user_signed_in? %>
-      <header style="text-align: right; padding: 16px;">
-        <%= button_to 'ログアウト',
-                      destroy_user_session_path,
-                      method: :delete,
-                      class: 'btn btn-back' %>
+      <header style="padding:16px; display:flex; justify-content:flex-end; gap:16px; align-items:center;">
+
+        <!-- 通知ベル -->
+        <div style="position:relative; display:inline-block;">
+          <span id="notification-bell"
+                data-user-id="<%= current_user.id %>"
+                style="cursor:pointer; font-size:1.6rem;">
+            🔔
+          </span>
+
+          <!-- 未読バッジ -->
+          <span id="notification-badge"
+                style="
+                  position:absolute;
+                  top:-6px;
+                  right:-10px;
+                  background:red;
+                  color:white;
+                  border-radius:50%;
+                  padding:2px 6px;
+                  font-size:12px;
+                  display:none;">
+            <%= current_user.notifications.where(read: false).count %>
+          </span>
+        </div>
+
+        <!-- ログアウト -->
+        <%= button_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'btn btn-back' %>
+
       </header>
+
+      <!-- 通知リスト -->
+      <div id="notifications"
+           style="
+             position:fixed;
+             top:70px;
+             right:16px;
+             width:260px;
+             max-height:300px;
+             overflow-y:auto;
+             background:white;
+             border:1px solid #ccc;
+             border-radius:6px;
+             box-shadow:0 2px 8px rgba(0,0,0,0.2);
+             display:none;
+             z-index:1000;
+           ">
+
+        <% current_user.notifications.order(created_at: :desc).each do |n| %>
+
+          <div class="notification-item <%= 'unread' unless n.read %>"
+               data-notification-id="<%= n.id %>"
+               style="
+                 padding:10px;
+                 border-bottom:1px solid #eee;
+                 cursor:pointer;
+                 font-weight:<%= 'bold' unless n.read %>;
+               ">
+            <%= n.message %>
+          </div>
+
+        <% end %>
+
+      </div>
     <% end %>
 
     <%= yield %>
 
     <% unless current_page?(privacy_policy_path) %>
-      <footer style="text-align: center; padding: 16px; margin-top: 24px;">
+      <footer style="text-align:center; padding:16px; margin-top:24px;">
         <%= link_to "プライバシーポリシー", privacy_policy_path %>
       </footer>
     <% end %>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const bell = document.getElementById("notification-bell")
+  const list = document.getElementById("notifications")
+  const badge = document.getElementById("notification-badge")
+
+  if (!bell || !list) return
+
+  // バッジ表示判定
+  if (badge && badge.innerText == "0") {
+    badge.style.display = "none"
+  } else if (badge) {
+    badge.style.display = "inline-block"
+  }
+
+  // ベルクリック
+  bell.addEventListener("click", () => {
+
+    list.style.display = list.style.display === "block" ? "none" : "block"
+
+    // 未読を既読に
+    list.querySelectorAll(".notification-item.unread").forEach(item => {
+
+      item.classList.remove("unread")
+
+      const id = item.dataset.notificationId
+
+      fetch(`/notifications/${id}/mark_read`, {
+        method: "PATCH",
+        headers: {
+          "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
+        }
+      })
+
+    })
+
+    // バッジ消す
+    if (badge) badge.style.display = "none"
+
+  })
+
+})
+</script>
+
   </body>
 </html>

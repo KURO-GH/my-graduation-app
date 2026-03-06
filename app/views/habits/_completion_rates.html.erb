@@ -1,0 +1,12 @@
+<!-- app/views/habits/_completion_rates.html.erb -->
+<div id="completion-rates">
+  <p>今週の達成率: <%= @week_completion_rate %>%</p>
+  <div class="week-completion-bar-wrapper">
+    <div class="week-completion-bar" style="width: <%= @week_completion_rate %>%"></div>
+  </div>
+
+  <p>今月の達成率: <%= @month_completion_rate %>%</p>
+  <div class="month-completion-bar-wrapper">
+    <div class="month-completion-bar" style="width: <%= @month_completion_rate %>%"></div>
+  </div>
+</div>
