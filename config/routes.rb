@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   # プライバシーポリシー
   get 'privacy_policy', to: 'static_pages#privacy_policy'
 
+  # 利用規約
+  get 'terms', to: 'static_pages#terms'
+
   # トップページ
   root 'home#index'
 
@@ -37,3 +40,4 @@ Rails.application.routes.draw do
     end
   end
 end
+
