@@ -1,82 +1,85 @@
-<!-- app/views/habits/review.html.erb -->
+<div class="container">
 
-<h1>習慣の振り返り</h1>
+  <div class="header-bar">
+    <!-- 左：戻るボタン -->
+    <div class="header-left">
+      <%= link_to "← 学習記録一覧",
+          study_logs_path,
+          class: "btn btn-back" %>
+    </div>
 
-<!-- 通知リスト -->
-<div id="notifications" class="notification-list" style="position: fixed; top: 60px; right: 16px; width: 250px; max-height: 300px; overflow-y: auto; background: white; border: 1px solid #ccc; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); display: none; z-index: 1000;">
-  <% current_user.notifications.order(created_at: :desc).each do |n| %>
-    <div class="notification-item <%= 'unread' unless n.read %>" data-notification-id="<%= n.id %>" style="padding: 0.5rem; border-bottom: 1px solid #eee; cursor: pointer; font-weight: <%= 'bold' unless n.read %>;">
-      <%= n.message %>
+    <!-- 中央：タイトル -->
+    <div class="header-center">
+      <h1 class="page-title">習慣の振り返り</h1>
+    </div>
+
+    <!-- 右：ここは空でもOK（ベルやログアウト用にスペース確保） -->
+    <div class="header-right">
+      <!-- 今は何も入れない -->
+    </div>
+  </div> <!-- header-bar 終了 -->
+
+  <!-- フィルター -->
+  <div class="filter-card">
+    <%= form_with url: review_habits_path, method: :get, local: true do |f| %>
+      <div class="habit-filter-form">
+        <%= f.label :category, "カテゴリ" %>
+        <%= f.select :category,
+            options_for_select(@categories, params[:category]),
+            include_blank: "すべて",
+            class: "select-input" %>
+
+        <%= f.label :status, "達成状況" %>
+        <%= f.select :status,
+            options_for_select([["すべて", ""], ["完了", "completed"], ["未完", "incomplete"]], params[:status]),
+            class: "select-input" %>
+
+        <%= f.submit "表示", class: "btn btn-info" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- 達成率 -->
+  <div class="completion-card">
+    <%= render "completion_rates",
+        week_completion_rate: @week_completion_rate,
+        month_completion_rate: @month_completion_rate %>
+  </div>
+
+  <% @habits_by_date.each do |date, habits| %>
+    <h2 class="date-title"><%= date.strftime("%Y/%m/%d") %></h2>
+
+    <div class="table-card">
+      <table class="habits-table">
+        <thead>
+          <tr>
+            <th>習慣名</th>
+            <th>カテゴリ</th>
+            <th>達成状況</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% habits.each do |habit| %>
+            <tr id="habit-<%= habit.id %>" class="<%= habit.completed ? 'completed' : 'incomplete' %>">
+              <td><%= habit.name %></td>
+              <td>
+                <span class="category-tag category-<%= habit.category %>">
+                  <%= habit.category %>
+                </span>
+              </td>
+              <td class="habit-status"><%= habit.completed ? "✅ 完了" : "❌ 未完" %></td>
+              <td>
+                <%= button_to (habit.completed ? '完了解除' : '完了'),
+                              toggle_complete_habit_path(habit),
+                              method: :patch,
+                              class: "btn btn-complete" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   <% end %>
+
 </div>
-
-<%= link_to "← 学習記録一覧に戻る", study_logs_path, class: "btn btn-back", style: "margin-bottom: 1rem;" %>
-
-<%= form_with url: review_habits_path, method: :get, local: true do |f| %>
-  <div class="filter-form">
-    <%= f.label :category, "カテゴリで絞り込み" %>
-    <%= f.select :category, options_for_select(@categories, params[:category]), include_blank: "すべて", class: "select-input" %>
-
-    <%= f.label :status, "達成状況で絞り込み" %>
-    <%= f.select :status, options_for_select([["すべて", ""], ["完了", "completed"], ["未完", "incomplete"]], params[:status]), class: "select-input" %>
-
-    <%= f.submit "表示", class: "btn btn-primary" %>
-  </div>
-<% end %>
-
-<!-- 達成率バー：フォームの下、習慣テーブルの上 -->
-<%= render "completion_rates", week_completion_rate: @week_completion_rate, month_completion_rate: @month_completion_rate %>
-
-<% @habits_by_date.each do |date, habits| %>
-  <h2><%= date.strftime("%Y/%m/%d") %></h2>
-  <table class="habits-table">
-    <thead>
-      <tr>
-        <th>習慣名</th>
-        <th>カテゴリ</th>
-        <th>達成状況</th>
-        <th>操作</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% habits.each do |habit| %>
-        <tr id="habit-<%= habit.id %>" class="<%= habit.completed ? 'completed' : 'incomplete' %>">
-          <td><%= habit.name %></td>
-          <td><%= habit.category %></td>
-          <td class="habit-status"><%= habit.completed ? "✅ 完了" : "❌ 未完" %></td>
-          <td>
-            <%= button_to (habit.completed ? '完了解除' : '完了'),
-                          toggle_complete_habit_path(habit),
-                          method: :patch,
-                          class: "btn btn-complete" %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const bell = document.getElementById("notification-bell")
-  const list = document.getElementById("notifications")
-  if (!bell || !list) return
-
-  bell.addEventListener("click", () => {
-    const unreadItems = list.querySelectorAll(".notification-item.unread")
-    unreadItems.forEach(item => {
-      item.classList.remove("unread")
-      const id = item.dataset.notificationId
-      fetch(`/notifications/${id}/mark_read`, {
-        method: "PATCH",
-        headers: {
-          "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
-        }
-      })
-    })
-    bell.classList.remove("has-new")
-    list.style.display = list.style.display === "block" ? "none" : "block"
-  })
-})
-</script>

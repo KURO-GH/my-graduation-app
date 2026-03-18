@@ -32,8 +32,32 @@ class HabitsController < ApplicationController
   end
 
   def toggle_complete
+    Rails.logger.debug "🔥 toggle_complete通った"
+
     @habit = current_user.habits.find(params[:id])
-    @habit.toggle!(:completed) # 完了状態を切り替え
+
+    # 変更前の状態を保存
+    before = @habit.completed
+
+    # 完了状態を切り替え
+    @habit.toggle!(:completed)
+
+    # 「未完 → 完了」になった時だけ通知
+    if !before && @habit.completed
+      notification = Notification.create!(
+        user: current_user,
+        message: "#{@habit.name} を完了しました！",
+        read: false
+      )
+
+      ActionCable.server.broadcast(
+        "notification_channel_#{current_user.id}",
+        {
+          id: notification.id,
+          message: notification.message
+        }
+      )
+    end
 
     # 今週・今月の達成率再計算
     habits = current_user.habits
@@ -42,31 +66,17 @@ class HabitsController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream do
-        turbo_streams = [
+        render turbo_stream: [
           turbo_stream.replace("habit-#{@habit.id}", partial: "habits/habit", locals: { habit: @habit }),
           turbo_stream.replace(
             "completion-rates",
             partial: "habits/completion_rates",
-            locals: { week_completion_rate: @week_completion_rate, month_completion_rate: @month_completion_rate }
+            locals: {
+              week_completion_rate: @week_completion_rate,
+              month_completion_rate: @month_completion_rate
+            }
           )
         ]
-
-        # 完了なら通知作成＆送信
-        if @habit.completed
-          notification = Notification.create!(
-            user: current_user,
-            message: "#{@habit.name} を完了しました！",
-            read: false
-          )
-
-          # ← ここを修正：引数はハッシュ1個にまとめる
-          ActionCable.server.broadcast(
-            "notification_channel_#{current_user.id}",
-            { id: notification.id, message: notification.message }
-          )
-        end
-
-        render turbo_stream: turbo_streams
       end
 
       format.html { redirect_back(fallback_location: review_habits_path) }

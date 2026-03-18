@@ -19,7 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2026_03_04_080533) do
     t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "completed"
+    t.boolean "completed", default: false
     t.bigint "user_id", null: false
     t.bigint "study_log_id", null: false
     t.index ["study_log_id"], name: "index_habits_on_study_log_id"

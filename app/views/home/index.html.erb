@@ -13,21 +13,20 @@
             class: 'btn btn-delete' %>
     </div>
   <% else %>
-    <div class="hero-buttons">
-      <%= link_to '新規登録',
-            new_user_registration_path,
-            class: 'btn btn-edit' %>
+  <div class="hero-buttons">
+    <%= link_to '新規登録',
+      new_user_registration_path,
+      class: 'btn btn-signup' %>
 
-      <%= link_to 'ログイン',
-            new_user_session_path,
-            class: 'btn btn-delete' %>
+    <%= link_to 'ログイン',
+          new_user_session_path,
+          class: 'btn btn-delete' %>
 
-      <%= link_to "Googleでログイン",
-            user_google_oauth2_omniauth_authorize_path,
-            class: "btn btn-google",
-            data: { turbo: false } %>
+    <%= link_to "Googleでログイン",
+          user_google_oauth2_omniauth_authorize_path,
+          class: "btn btn-google",
+          data: { turbo: false } %>
 
-      <%= link_to "使い方を見る", home_how_to_use_path, class: "btn btn-back" %>
-    </div>
-  <% end %>
-</div>
+    <%= link_to "使い方を見る", home_how_to_use_path, class: "btn btn-back" %>
+  </div>
+<% end %>

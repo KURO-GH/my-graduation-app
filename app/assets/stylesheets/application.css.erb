@@ -1,0 +1,354 @@
+/*
+ * This is a manifest file that'll be compiled into application.css
+ *= require_self
+ *= require_tree .
+*/
+
+/* =========================
+   リセット
+========================= */
+html, body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+  color: #2c3e50;
+}
+
+/* =========================
+   背景画像
+========================= */
+body {
+  background-image: url('<%= asset_path("johannes-plenio-bhCdwWNmXw8-unsplash.jpg") %>');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+/* =========================
+   コンテナ
+========================= */
+.container {
+  max-width: 700px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+/* =========================
+   ヘッダー
+========================= */
+.header-bar {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:20px;
+}
+
+.header-left,
+.header-right {
+  display:flex;
+  gap:10px;
+}
+
+.header-center {
+  text-align:center;
+  flex:1;
+}
+
+/* =========================
+   タイトル（統一対応版）
+========================= */
+.page-title {
+  text-align: center;
+  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.2);
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+  margin: 0;
+  padding: 10px 16px;
+  border-radius: 10px;
+}
+
+/* =========================
+   ボタン共通
+========================= */
+button.btn,
+input.btn,
+a.btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 22px;
+  font-size:14px;
+  font-weight:600;
+  border-radius:25px;
+  border:2px solid;
+  cursor:pointer;
+  text-decoration:none;
+  transition:all 0.2s ease;
+  background-color: transparent;
+  color:white;
+}
+
+button.btn:hover,
+a.btn:hover {
+  transform:translateY(-2px);
+  opacity:0.9;
+}
+
+/* =========================
+   ボタン色管理
+========================= */
+.btn.btn-signup {
+  background:#4caf50;
+  border:2px solid #4caf50;
+}
+.btn.btn-signup:hover {
+  background:#43a047;
+  border-color:#43a047;
+}
+
+.btn.btn-edit {
+  background:#27ae60;
+  border:2px solid #27ae60;
+}
+.btn.btn-edit:hover {
+  background:#1e8449;
+  border-color:#1e8449;
+}
+
+.btn.btn-delete {
+  background:#e74c3c;
+  border:2px solid #e74c3c;
+}
+.btn.btn-delete:hover {
+  background:#c0392b;
+  border-color:#c0392b;
+}
+
+.btn.btn-info {
+  background:#3498db;
+  border:2px solid #3498db;
+  margin-top: 10px;
+}
+.btn.btn-info:hover {
+  background:#2980b9;
+  border-color:#2980b9;
+  margin-top: 10px;
+}
+
+.btn.btn-back {
+  background:#b0b8c1;
+  border:2px solid #b0b8c1;
+  color:#2c3e50;
+}
+
+.btn.btn-google {
+  background:#4285F4;
+  border:2px solid #4285F4;
+}
+
+.btn.btn-login {
+  background:#3498db;
+  border:2px solid #3498db;
+}
+.btn.btn-login:hover {
+  background:#2980b9;
+}
+
+.btn.btn-search {
+  background:#f39c12;
+  border-color:#f39c12;
+}
+
+.btn.btn-review {
+  background: linear-gradient(135deg, #ff9a3c, #ff6a00);
+  border: none;
+}
+
+/* 完了ボタン */
+.btn.btn-complete {
+  background: #9b59b6;
+  border: 2px solid #9b59b6;
+}
+.btn.btn-complete:hover {
+  background: #8e44ad;
+  border-color: #8e44ad;
+}
+
+/* =========================
+   カード
+========================= */
+.study-log,
+.filter-card,
+.completion-card,
+.table-card {
+  background: rgba(255,255,255,0.95);
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* hover */
+.study-log:hover {
+  transform:translateY(-5px);
+}
+
+/* =========================
+   フォーム
+========================= */
+.form-group { margin-bottom:18px; }
+
+input[type="text"],
+textarea,
+select {
+  width:100%;
+  padding:10px 14px;
+  margin-top:6px;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+
+textarea {
+  min-height:140px;
+}
+
+.select-input {
+  padding:8px 12px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+/* =========================
+   フィルター
+========================= */
+.habit-filter-form {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+}
+
+/* =========================
+   テーブル
+========================= */
+.habits-table {
+  width:100%;
+  border-collapse:collapse;
+}
+
+.habits-table th {
+  background:#f5f7fa;
+  padding:10px;
+}
+
+.habits-table td {
+  padding:10px;
+  border-bottom:2px solid #ccc;
+  text-align: center;
+}
+
+/* 状態 */
+.completed {
+  background: rgba(76, 175, 80, 0.1);
+}
+
+.incomplete {
+  background: rgba(231, 76, 60, 0.05);
+}
+
+/* =========================
+   テキスト
+========================= */
+.date-title {
+  margin: 24px 0 10px;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+}
+
+/* =========================
+   その他
+========================= */
+.actions { margin-bottom:20px; }
+.log-actions { margin-top:10px; display:flex; gap:10px; }
+
+/* バーの土台 */
+.completion-bar-bg {
+  background: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 20px;
+  margin-bottom: 10px;
+}
+
+/* 中のバー */
+.week-completion-bar,
+.month-completion-bar {
+  height: 100%;
+  border-radius: 10px;
+}
+
+.week-completion-bar {
+  background: linear-gradient(90deg, #4caf50, #81c784);
+}
+
+.month-completion-bar {
+  background: linear-gradient(90deg, #2196f3, #64b5f6);
+}
+
+.auth-links {
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top: 5px;
+}
+
+.auth-links .btn {
+  padding:8px 16px;
+  margin-top: 5px;
+}
+
+.study-log form {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.hero {
+  min-height:100vh;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(8px);
+  padding:30px;
+  border-radius:16px;
+  text-align:center;
+  box-shadow:0 8px 20px rgba(0,0,0,0.1);
+}
+
+.footer {
+  text-align:center;
+  padding:16px;
+  margin-top:24px;
+}
+
+.footer a {
+  margin:0 10px;
+  color:#2c3e50;
+}
+
+.search-form form {
+  display: flex;
+  gap: 8px;
+}
+
+.search-form input {
+  flex:;   /* 入力欄だけ伸びる */
+}
+
+.search-form .btn {
+  flex: 0;   /* ボタンは伸びない */
+  margin-top: 5px;
+}
+  

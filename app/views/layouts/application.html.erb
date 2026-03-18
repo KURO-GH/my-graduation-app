@@ -84,11 +84,11 @@
 
     <%= yield %>
 
-    <% unless current_page?(privacy_policy_path) %>
-      <footer style="text-align:center; padding:16px; margin-top:24px;">
+    <% if controller_name == "home" && action_name == "index" %>
+      <footer class="footer">
         <%= link_to "プライバシーポリシー", privacy_policy_path %>
         <%= link_to "利用規約", terms_path %>
-        </footer>
+      </footer>
     <% end %>
 
 

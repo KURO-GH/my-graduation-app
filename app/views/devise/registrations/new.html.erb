@@ -1,4 +1,4 @@
-<h1>新規登録</h1>
+<h1></h1>
 
 <div class="form-wrapper">
   <div class="study-log">
@@ -30,19 +30,17 @@
         <%= f.password_field :password_confirmation, class: "form-input" %>
       </div>
 
-      <div style="margin-top: 16px;">
-        <!-- 登録ボタン -->
+      <!-- 登録ボタンも中央寄せしたいならここも揃える -->
+      <div style="margin-top: 16px; text-align: center;">
         <%= f.submit '登録する', class: 'btn btn-signup' %>
       </div>
+
     <% end %>
 
-    <div style="margin-top: 12px;">
-      <!-- ログインはこちら -->
+    <!-- 🔥 ここが重要 -->
+    <div class="auth-links">
       <%= link_to "ログインはこちら", new_user_session_path, class: "btn btn-back" %>
-    </div>
 
-    <div style="margin-top: 12px;">
-      <!-- Googleでログイン -->
       <%= link_to "Googleでログイン", user_google_oauth2_omniauth_authorize_path, class: "btn btn-google", data: { turbo: false } %>
     </div>
 

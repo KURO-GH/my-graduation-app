@@ -1,39 +1,71 @@
-<h1>学習記録一覧</h1>
+<div class="container">
 
-<!-- 検索フォーム -->
-<%= form_with url: study_logs_path, method: :get, local: true do |f| %>
-  <%= f.text_field :keyword, value: params[:keyword], placeholder: "タイトル・内容で検索" %>
-  <%= f.select :category, ["全て", "学習", "仕事", "趣味", "その他"], selected: params[:category] || "全て" %>
-  <%= f.submit "検索", class: "btn btn-info" %>
-<% end %>
-
-<!-- 新規投稿ボタン + 振り返りリンク -->
-<div style="margin-top: 1rem; margin-bottom: 2rem;">
-  <%= link_to '＋ 新規投稿', new_study_log_path, class: 'btn btn-edit' %>
-  <%= link_to "習慣の振り返りを見る",
-            review_habits_path,
-            class: "btn btn-review",
-            style: "margin-left: 1rem;" %>
-</div>
-
-<hr>
-
-<!-- 投稿一覧 -->
-<% @study_logs.each do |log| %>
-  <div class="study-log" style="margin-bottom: 1.5rem;">
-    <h3><%= log.title %> (<%= log.category %>)</h3>
-    <p><%= simple_format(log.content) %></p>
-    <small>投稿日：<%= log.created_at.strftime("%Y/%m/%d %H:%M") %></small>
-    <br><br>
-
-    <!-- 編集・削除ボタン -->
-    <%= link_to '編集', edit_study_log_path(log), class: 'btn btn-edit', style: 'margin-right: 0.5rem;' %>
-    <%= button_to '削除',
-                  study_log_path(log),
-                  method: :delete,
-                  data: { confirm: '削除しますか？' },
-                  class: 'btn btn-delete',
-                  form: { style: 'display: inline; margin-right: 0.5rem;' } %>
+  <!-- 👇 タイトル専用 -->
+  <div class="page-title">
+    <h1>学習記録一覧</h1>
   </div>
-  <hr>
-<% end %>
+
+  <!-- 検索フォーム -->
+  <div class="search-form">
+    <%= form_with url: study_logs_path, method: :get, local: true do |f| %>
+      <%= f.text_field :keyword,
+          value: params[:keyword],
+          placeholder: "タイトル・内容で検索" %>
+
+      <%= f.select :category,
+          ["全て", "学習", "仕事", "趣味", "その他"],
+          selected: params[:category] || "全て" %>
+
+      <%= f.submit "検索", class: "btn btn-search" %>
+    <% end %>
+  </div>
+
+  <!-- 新規投稿ボタン + 振り返り -->
+  <div class="actions">
+    <%= link_to '＋ 新規投稿', new_study_log_path, class: 'btn btn-edit' %>
+
+    <%= link_to "習慣の振り返りを見る",
+                review_habits_path,
+                class: "btn btn-info ml-1" %>
+  </div>
+
+  <!-- 投稿一覧 -->
+  <% @study_logs.each do |log| %>
+
+    <div class="study-log">
+
+      <h3 class="log-title">
+        <%= log.title %>
+        <span class="category-tag category-<%= log.category %>">
+          <%= log.category %>
+        </span>
+      </h3>
+
+      <p>
+        <%= simple_format(log.content) %>
+      </p>
+
+      <small>
+        投稿日：<%= log.created_at.strftime("%Y/%m/%d %H:%M") %>
+      </small>
+
+      <div class="log-actions">
+
+        <%= link_to '編集',
+            edit_study_log_path(log),
+            class: 'btn btn-edit' %>
+
+        <%= button_to '削除',
+              study_log_path(log),
+              method: :delete,
+              data: { confirm: '削除しますか？' },
+              class: 'btn btn-delete',
+              form: { style: 'display:inline' } %>
+
+      </div>
+
+    </div>
+
+  <% end %>
+
+</div>
