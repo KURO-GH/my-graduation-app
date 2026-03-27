@@ -1,11 +1,13 @@
-<h1>学習記録 新規投稿</h1>
+<div class="study-log">
 
-<div class="form-wrapper">
-  <div class="study-log">
-    <%= render 'form', study_log: @study_log %>
+  <h1 class="form-title">学習記録 新規投稿</h1>
 
-    <div style="margin-top: 16px;">
-      <%= link_to '一覧に戻る', study_logs_path, class: 'btn btn-back' %>
-    </div>
+  <%= render 'form', study_log: @study_log %>
+
+  <div class="form-actions">
+    <%= link_to '一覧に戻る',
+        study_logs_path,
+        class: 'btn btn-back' %>
   </div>
+
 </div>

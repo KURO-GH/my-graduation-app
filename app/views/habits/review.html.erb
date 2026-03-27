@@ -1,23 +1,12 @@
 <div class="container">
 
-  <div class="header-bar">
-    <!-- 左：戻るボタン -->
-    <div class="header-left">
-      <%= link_to "← 学習記録一覧",
-          study_logs_path,
-          class: "btn btn-back" %>
-    </div>
+  <!-- 戻るボタン -->
+  <%= link_to "← 学習記録一覧",
+      study_logs_path,
+      class: "btn btn-back" %>
 
-    <!-- 中央：タイトル -->
-    <div class="header-center">
-      <h1 class="page-title">習慣の振り返り</h1>
-    </div>
-
-    <!-- 右：ここは空でもOK（ベルやログアウト用にスペース確保） -->
-    <div class="header-right">
-      <!-- 今は何も入れない -->
-    </div>
-  </div> <!-- header-bar 終了 -->
+  <!-- タイトル -->
+  <h1 class="page-title">習慣の振り返り</h1>
 
   <!-- フィルター -->
   <div class="filter-card">
@@ -61,19 +50,19 @@
         </thead>
         <tbody>
           <% habits.each do |habit| %>
-            <tr id="habit-<%= habit.id %>" class="<%= habit.completed ? 'completed' : 'incomplete' %>">
+            <tr class="<%= habit.completed ? 'completed' : 'incomplete' %>">
               <td><%= habit.name %></td>
               <td>
                 <span class="category-tag category-<%= habit.category %>">
                   <%= habit.category %>
                 </span>
               </td>
-              <td class="habit-status"><%= habit.completed ? "✅ 完了" : "❌ 未完" %></td>
+              <td><%= habit.completed ? "✅ 完了" : "❌ 未完" %></td>
               <td>
                 <%= button_to (habit.completed ? '完了解除' : '完了'),
                               toggle_complete_habit_path(habit),
                               method: :patch,
-                              class: "btn btn-complete" %>
+                              class: "btn btn-sm #{habit.completed ? 'btn-danger' : 'btn-success'}"%>
               </td>
             </tr>
           <% end %>

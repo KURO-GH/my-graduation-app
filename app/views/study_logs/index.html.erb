@@ -1,33 +1,41 @@
 <div class="container">
 
-  <!-- 👇 タイトル専用 -->
-  <div class="page-title">
-    <h1>学習記録一覧</h1>
+  <!-- タイトル -->
+  <h1 class="page-title">学習記録一覧</h1>
+
+  <!-- アクションボタン -->
+  <div class="page-actions">
+    <%= link_to '＋ 新規投稿',
+        new_study_log_path,
+        class: 'btn btn-primary' %>
+
+    <%= link_to "習慣の振り返りを見る",
+        review_habits_path,
+        class: "btn btn-secondary" %>
   </div>
 
-  <!-- 検索フォーム -->
-  <div class="search-form">
+  <!-- 🔍 検索カード -->
+  <div class="filter-card">
     <%= form_with url: study_logs_path, method: :get, local: true do |f| %>
-      <%= f.text_field :keyword,
-          value: params[:keyword],
-          placeholder: "タイトル・内容で検索" %>
 
-      <%= f.select :category,
-          ["全て", "学習", "仕事", "趣味", "その他"],
-          selected: params[:category] || "全て" %>
+      <div class="form-group">
+        <%= f.text_field :keyword,
+            value: params[:keyword],
+            placeholder: "タイトル・内容で検索" %>
+      </div>
 
-      <%= f.submit "検索", class: "btn btn-search" %>
+      <div class="form-group">
+        <%= f.select :category,
+            ["全て", "学習", "仕事", "趣味", "その他"],
+            selected: params[:category] || "全て" %>
+      </div>
+
+      <%= f.submit "検索", class: "btn btn-primary" %>
+
     <% end %>
   </div>
 
-  <!-- 新規投稿ボタン + 振り返り -->
-  <div class="actions">
-    <%= link_to '＋ 新規投稿', new_study_log_path, class: 'btn btn-edit' %>
 
-    <%= link_to "習慣の振り返りを見る",
-                review_habits_path,
-                class: "btn btn-info ml-1" %>
-  </div>
 
   <!-- 投稿一覧 -->
   <% @study_logs.each do |log| %>
@@ -53,13 +61,13 @@
 
         <%= link_to '編集',
             edit_study_log_path(log),
-            class: 'btn btn-edit' %>
+            class: 'btn btn-success' %>
 
         <%= button_to '削除',
               study_log_path(log),
               method: :delete,
               data: { confirm: '削除しますか？' },
-              class: 'btn btn-delete',
+              class: 'btn btn-danger',
               form: { style: 'display:inline' } %>
 
       </div>

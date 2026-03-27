@@ -1,11 +1,13 @@
-<h1>学習記録を編集</h1>
-
 <div class="study-log">
+
+  <h1 class="form-title">学習記録を編集</h1>
+
   <%= render "form", study_log: @study_log %>
 
-  <div style="margin-top: 1.5rem;">
+  <div class="form-actions">
     <%= link_to "一覧に戻る",
-                study_logs_path,
-                class: "btn btn-back" %>
+        study_logs_path,
+        class: "btn btn-back" %>
   </div>
+
 </div>

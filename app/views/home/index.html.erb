@@ -1,32 +1,48 @@
 <div class="hero">
   <h1>📘 学習記録アプリ</h1>
+
   <p class="hero-text">
-    今日の学びを、少しずつ積み上げよう。
+    毎日の学習内容を簡単に記録して、後から振り返り。進捗が一目でわかる！
   </p>
 
   <% if user_signed_in? %>
     <div class="hero-buttons">
-      <%= link_to '学習記録一覧へ', study_logs_path, class: 'btn btn-edit' %>
+      <%= link_to '記録を見る',
+            study_logs_path,
+            class: 'btn btn-primary' %>
+
       <%= button_to 'ログアウト',
             destroy_user_session_path,
             method: :delete,
-            class: 'btn btn-delete' %>
+            class: 'btn btn-secondary' %>
     </div>
+
   <% else %>
-  <div class="hero-buttons">
-    <%= link_to '新規登録',
-      new_user_registration_path,
-      class: 'btn btn-signup' %>
+    <div class="hero-buttons">
 
-    <%= link_to 'ログイン',
-          new_user_session_path,
-          class: 'btn btn-delete' %>
+      <!-- メインCTA -->
+      <%= link_to '無料で始める',
+            new_user_registration_path,
+            class: 'btn btn-primary' %>
 
-    <%= link_to "Googleでログイン",
-          user_google_oauth2_omniauth_authorize_path,
-          class: "btn btn-google",
-          data: { turbo: false } %>
+      <!-- サブ -->
+      <%= link_to 'ログイン',
+            new_user_session_path,
+            class: 'btn btn-secondary' %>
 
-    <%= link_to "使い方を見る", home_how_to_use_path, class: "btn btn-back" %>
-  </div>
-<% end %>
+      <!-- 補助 -->
+      <%= link_to "使い方を見る",
+            home_how_to_use_path,
+            class: "btn btn-link" %>
+
+      <%= link_to "プライバシーポリシー",
+            privacy_policy_path,
+            class: "footer-link" %>
+
+      <%= link_to "利用規約",
+            terms_path,
+            class: "footer-link" %>
+
+    </div>
+  <% end %>
+</div>
